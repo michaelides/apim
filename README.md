@@ -31,17 +31,6 @@ The materials were originally developed for the EAOHP 2026 conference workshop *
 
 ## Quick start
 
-```bash
-make deps      # install R packages
-make preview   # live-reload preview at http://localhost:4200
-```
-
-To build the static site (output goes to `docs/` for GitHub Pages):
-
-```bash
-make site
-```
-
 The site is published from the `docs/` directory of this repository to <https://michaelides.github.io/apim/>.
 
 ## Citing
