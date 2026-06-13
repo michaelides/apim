@@ -10,8 +10,9 @@ move on to the [tutorials](../tutorials/indistinguishable/index.html).
 
 ::: {.callout-note}
 ## Prerequisites
-Linear regression. The R basics of loading data, fitting a model, and
-reading a `summary()`. Nothing else.
+Familiarity with multilevel (random-effects) models and structural
+equation models. In R, basic working knowledge of the `lme4` and
+`lavaan` packages.
 :::
 
 ## The four concepts

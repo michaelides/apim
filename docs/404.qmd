@@ -1,0 +1,9 @@
+---
+title: "404"
+---
+
+# Page not found
+
+There is a 1 in 99,999,999 chance that the page you are looking for does not exist. Do not panic.
+
+[Return to the home page](../index.html)

@@ -1,6 +1,6 @@
 ---
 title: "About"
-subtitle: "Author, origin, and how to run this site yourself"
+subtitle: "Author, origin, and licensing"
 ---
 
 ## Author
@@ -39,44 +39,6 @@ the site as:
 
 > Michaelides, G. (2026). *Dyadic Data Analysis in R.* Online at
 > <https://michaelides.github.io/apim/>. CC BY 4.0.
-
-## How to run this site yourself
-
-The site is a Quarto project. The full source is in the [GitHub
-repository](https://github.com/michaelides/apim).
-To run it locally:
-
-::: {.callout-note}
-## Prerequisites
-- R ≥ 4.2
-- Quarto ≥ 1.4
-- The R packages: `lme4`, `lmerTest`, `lavaan`, `dplyr`, `tibble`, `interactions`, `semPlot`, `knitr`, `rmarkdown`
-:::
-
-```bash
-# Clone the repository
-git clone https://github.com/michaelides/apim.git
-cd dyadic-data-analysis-in-r
-
-# Install the R dependencies
-make deps
-
-# Generate the simulated data (or skip this — the site ships with the data)
-make data
-
-# Live-preview the site
-make preview
-# Opens http://localhost:4200 in your browser
-
-# Build the static site
-make site
-# Output: docs/
-```
-
-The [`Makefile`](https://github.com/michaelides/apim/blob/master/Makefile)
-also exposes a `make bundle` target that packages the offline
-workshop (decks, scripts, exercises, data, references) into a
-single zip.
 
 ## Pages
 
