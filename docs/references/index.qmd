@@ -146,12 +146,12 @@ tutorial](../tutorials/moderated/hahn2014.html).
 
 | File | Purpose |
 |---|---|
-| [`scripts/01_simulate_data.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/01_simulate_data.R) | Data generation for the tutorial dataset |
-| [`scripts/02_indistinguishable_mlm.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/02_indistinguishable_mlm.R) | Indistinguishable dyads, MLM |
-| [`scripts/03_indistinguishable_sem.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/03_indistinguishable_sem.R) | Indistinguishable dyads, SEM (wide format, `lavaan`) |
-| [`scripts/04_distinguishable_mlm.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/04_distinguishable_mlm.R) | Distinguishable dyads, MLM with gender moderation |
-| [`scripts/05_distinguishable_sem_moderation.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/05_distinguishable_sem_moderation.R) | Distinguishable dyads, SEM with gender moderation |
-| [`scripts/06_distinguishable_sem_wide.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/06_distinguishable_sem_wide.R) | Distinguishable dyads, SEM wide format |
-| [`scripts/07_two_intercept_models.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/07_two_intercept_models.R) | Two-intercept (actor–partner) models |
-| [`scripts/08_moderated_apim.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts/08_moderated_apim.R) | Moderated APIM, replicating Hahn, Binnewies, & Dormann (2014) |
-| [`exercises/`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/exercises) | Student exercises |
+| [`scripts/01_simulate_data.R`](https://github.com/michaelides/apim/blob/master/scripts/01_simulate_data.R) | Data generation for the tutorial dataset |
+| [`scripts/02_indistinguishable_mlm.R`](https://github.com/michaelides/apim/blob/master/scripts/02_indistinguishable_mlm.R) | Indistinguishable dyads, MLM |
+| [`scripts/03_indistinguishable_sem.R`](https://github.com/michaelides/apim/blob/master/scripts/03_indistinguishable_sem.R) | Indistinguishable dyads, SEM (wide format, `lavaan`) |
+| [`scripts/04_distinguishable_mlm.R`](https://github.com/michaelides/apim/blob/master/scripts/04_distinguishable_mlm.R) | Distinguishable dyads, MLM with gender moderation |
+| [`scripts/05_distinguishable_sem_moderation.R`](https://github.com/michaelides/apim/blob/master/scripts/05_distinguishable_sem_moderation.R) | Distinguishable dyads, SEM with gender moderation |
+| [`scripts/06_distinguishable_sem_wide.R`](https://github.com/michaelides/apim/blob/master/scripts/06_distinguishable_sem_wide.R) | Distinguishable dyads, SEM wide format |
+| [`scripts/07_two_intercept_models.R`](https://github.com/michaelides/apim/blob/master/scripts/07_two_intercept_models.R) | Two-intercept (actor–partner) models |
+| [`scripts/08_moderated_apim.R`](https://github.com/michaelides/apim/blob/master/scripts/08_moderated_apim.R) | Moderated APIM, replicating Hahn, Binnewies, & Dormann (2014) |
+| [`exercises/`](https://github.com/michaelides/apim/blob/master/exercises) | Student exercises |

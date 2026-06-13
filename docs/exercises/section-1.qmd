@@ -6,7 +6,7 @@ title: "Section 1 — Data simulation & inspection"
 
 **What you are practising:** orienting yourself to a new dyadic dataset before any modelling.
 
-**Reference:** [`exercises/simulate_exercise_data.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/exercises/simulate_exercise_data.R) (the DGP, no analysis code) and the [indistinguishable MLM tutorial](../../tutorials/indistinguishable/mlm.html#step-1-estimate-the-icc) (for the ICC helper).
+**Reference:** [`exercises/simulate_exercise_data.R`](https://github.com/michaelides/apim/blob/master/exercises/simulate_exercise_data.R) (the DGP, no analysis code) and the [indistinguishable MLM tutorial](../../tutorials/indistinguishable/mlm.html#step-1-estimate-the-icc) (for the ICC helper).
 
 ::: {.callout-note}
 ## Goal

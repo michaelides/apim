@@ -44,7 +44,7 @@ install.packages(c(
 ), repos = "https://cloud.r-project.org")
 ```
 
-The `make deps` target in the [`Makefile`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/Makefile)
+The `make deps` target in the [`Makefile`](https://github.com/michaelides/apim/blob/master/Makefile)
 runs the same command.
 
 ## Verifying the install

@@ -64,7 +64,7 @@ source("scripts/01_simulate_data.R")          # writes data/dyad_data.RData
 source("exercises/simulate_exercise_data.R")  # writes data/exercise_data.RData
 ```
 
-The full [Makefile](https://github.com/example/dyadic-data-analysis-in-r/blob/main/Makefile)
+The full [Makefile](https://github.com/michaelides/apim/blob/master/Makefile)
 also exposes a `make data` target that runs both scripts.
 
 ## Citing the underlying empirical work

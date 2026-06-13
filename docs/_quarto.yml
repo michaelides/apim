@@ -5,8 +5,8 @@ project:
 website:
   title: "Dyadic Data Analysis in R"
   description: "A practical guide to the Actor–Partner Interdependence Model with multilevel models and structural equation models in R."
-  site-url: "https://example.com/dyadic-data-analysis-in-r"
-  repo-url: "https://github.com/example/dyadic-data-analysis-in-r"
+  site-url: "https://michaelides.github.io/apim/"
+  repo-url: "https://github.com/michaelides/apim"
   repo-actions: [edit, issue]
   page-navigation: true
   search: true
@@ -40,7 +40,7 @@ website:
         href: about/index.qmd
     right:
       - icon: github
-        href: "https://github.com/example/dyadic-data-analysis-in-r"
+        href: "https://github.com/michaelides/apim"
         aria-label: "GitHub repository"
 
   sidebar:
@@ -116,7 +116,7 @@ website:
     left: "© 2026 George Michaelides. Materials released under CC BY 4.0."
     right:
       - icon: github
-        href: "https://github.com/example/dyadic-data-analysis-in-r"
+        href: "https://github.com/michaelides/apim"
         aria-label: "GitHub repository"
 
 format:
