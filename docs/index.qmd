@@ -38,11 +38,9 @@ and it is what the rest of this site teaches you to do in R.
 
 This site is for **applied researchers and graduate students** who want
 to analyse dyadic data with R. You should be comfortable with linear
-regression and the basics of R. Familiarity with `lme4` or `lavaan` is
-helpful but not assumed.
-
-No prior experience with multilevel models or structural equation
-modelling is required — every concept is introduced as it is used.
+regression and the basics of R. Basic or fundamental knowledge of
+multilevel models and structural equation modelling is assumed, as is
+working familiarity with the `lme4` and `lavaan` packages.
 
 ## How the site is organised
 
