@@ -6,7 +6,7 @@ title: "Section 7 — Two-intercept models"
 
 **What you are practising:** the `0 + gender` parameterisation trick that directly estimates separate intercepts per group, and its SEM analogue.
 
-**Reference:** [Two-intercept tutorial](../../tutorials/distinguishable/two-intercept.qmd).
+**Reference:** [Two-intercept tutorial](../../tutorials/distinguishable/two-intercept.html).
 
 ::: {.callout-note}
 ## Goal
@@ -33,7 +33,7 @@ The two-intercept approach is recommended when you want to report the absolute m
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [Two-intercept tutorial](../../tutorials/distinguishable/two-intercept.qmd). The three models are in "The three nested models"; the LRTs are in "The two likelihood ratio tests"; the SEM analogue is in "The SEM analogue (wide format)".
+**Tutorial reference:** [Two-intercept tutorial](../../tutorials/distinguishable/two-intercept.html). The three models are in "The three nested models"; the LRTs are in "The two likelihood ratio tests"; the SEM analogue is in "The SEM analogue (wide format)".
 
 **Substitutions:**
 - `ddl` → `ddl2`

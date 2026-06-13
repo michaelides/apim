@@ -3,7 +3,7 @@ title: "Distinguishable dyads: SEM with moderation"
 subtitle: "Two-level SEM with within-dyad gender interactions"
 ---
 
-The [MLM moderator tutorial](mlm-moderator.qmd) added gender ×
+The [MLM moderator tutorial](mlm-moderator.html) added gender ×
 predictor interactions to a long-format multilevel model. This
 tutorial does the same thing in `lavaan`, using the two-level SEM
 specification that decomposes variance into within-dyad and
@@ -43,7 +43,7 @@ print(table(ddl$gender))
 
 Place the four within-dyad predictors at the within level and the
 two dyad-level covariates at the between level. The two-level SEM
-is the SEM analogue of the [MLM tutorial](mlm-moderator.qmd).
+is the SEM analogue of the [MLM tutorial](mlm-moderator.html).
 
 ```{r}
 #| label: baseline-2level
@@ -116,7 +116,7 @@ pe[grepl("^ss_", pe$label), c("label", "est", "se", "pvalue")]
 The within-dyad SEM `aw_int` coefficient (gender × actor WNC) and
 `pw_int` (gender × partner WNC) should match the corresponding
 `wnc:genderfemale` and `partner_wnc:genderfemale` interactions in
-the [MLM moderator tutorial](mlm-moderator.qmd#step-3-likelihood-ratio-test).
+the [MLM moderator tutorial](mlm-moderator.html#step-3-likelihood-ratio-test).
 The simple slopes for males and females should also match the
 `sim_slopes()` output.
 :::
@@ -134,8 +134,8 @@ freedom. This means:
   comparing the baseline and moderator models.
 
 If you want a formal LRT, the right move is to fit both models in
-the wide format (see the [SEM wide tutorial](sem-wide.qmd)), or to
-use the [MLM moderator approach](mlm-moderator.qmd#step-3-likelihood-ratio-test),
+the wide format (see the [SEM wide tutorial](sem-wide.html)), or to
+use the [MLM moderator approach](mlm-moderator.html#step-3-likelihood-ratio-test),
 where the LRT is well-defined.
 
 ## What to take away
@@ -156,10 +156,10 @@ where the LRT is well-defined.
 
 ## What to read next
 
-- The [SEM wide tutorial](sem-wide.qmd) — wide format, the
+- The [SEM wide tutorial](sem-wide.html) — wide format, the
   three-model sequence, the k-pattern tests.
-- The [two-intercept tutorial](two-intercept.qmd) — a
+- The [two-intercept tutorial](two-intercept.html) — a
   parameterisation trick that estimates both intercepts directly.
 - The [Hahn et al. (2014) replication
-  tutorial](../moderated/hahn2014.qmd) — moderated APIM with a
+  tutorial](../moderated/hahn2014.html) — moderated APIM with a
   dyad-level moderator.

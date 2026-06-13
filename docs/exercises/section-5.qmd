@@ -6,7 +6,7 @@ title: "Section 5 — Distinguishable dyads: SEM (moderation)"
 
 **What you are practising:** mirroring the multilevel moderator approach in SEM with calculated simple slopes.
 
-**Reference:** [Distinguishable dyads: SEM with moderation tutorial](../../tutorials/distinguishable/sem-moderation.qmd).
+**Reference:** [Distinguishable dyads: SEM with moderation tutorial](../../tutorials/distinguishable/sem-moderation.html).
 
 ::: {.callout-note}
 ## Goal
@@ -30,7 +30,7 @@ Do the within-dyad SEM gender coefficients agree with the multilevel estimates f
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [SEM with moderation](../../tutorials/distinguishable/sem-moderation.qmd). The interaction-column construction is in the Setup block; the model is in step 2; the simple-slope definitions are in step 3.
+**Tutorial reference:** [SEM with moderation](../../tutorials/distinguishable/sem-moderation.html). The interaction-column construction is in the Setup block; the model is in step 2; the simple-slope definitions are in step 3.
 
 **Substitutions:**
 - `ddl` → `ddl2`

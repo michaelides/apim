@@ -6,7 +6,7 @@ title: "Section 8 — Moderated APIM (the centrepiece)"
 
 **What you are practising:** testing whether the partner crossover effect on each outcome is moderated by a dyad-level variable, using both multilevel modelling and SEM.
 
-**Reference:** [Hahn et al. (2014) replication tutorial](../../tutorials/moderated/hahn2014.qmd).
+**Reference:** [Hahn et al. (2014) replication tutorial](../../tutorials/moderated/hahn2014.html).
 
 ::: {.callout-note}
 ## Focal interactions to test
@@ -31,7 +31,7 @@ Compare the MLM and SEM simple-slope estimates for each outcome. Where do they d
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [Hahn et al. (2014) tutorial](../../tutorials/moderated/hahn2014.qmd). The MLM moderation is in "MLM specification"; the SEM moderation is in "SEM specification (wide format)"; the comparison is in "Compare MLM and SEM".
+**Tutorial reference:** [Hahn et al. (2014) tutorial](../../tutorials/moderated/hahn2014.html). The MLM moderation is in "MLM specification"; the SEM moderation is in "SEM specification (wide format)"; the comparison is in "Compare MLM and SEM".
 
 **Substitutions:**
 - `partner_wnc:has_children` → focal partner × focal moderator for each outcome

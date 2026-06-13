@@ -6,7 +6,7 @@ subtitle: "What every APIM analyst needs to know before opening R"
 Before you fit your first model, you need to know **why** the APIM
 exists. The four pages in this section give you the conceptual
 grounding. They are short on purpose — read them in order, and then
-move on to the [tutorials](../tutorials/indistinguishable/index.qmd).
+move on to the [tutorials](../tutorials/indistinguishable/index.html).
 
 ::: {.callout-note}
 ## Prerequisites
@@ -25,7 +25,7 @@ Why two people in the same dyad violate the standard regression
 assumption of independent residuals — and why this matters for *every*
 downstream test.
 
-[Read →](non-independence.qmd)
+[Read →](non-independence.html)
 :::
 
 ::: {.card}
@@ -35,7 +35,7 @@ The single most important design decision in dyadic analysis. Are the
 two members of each dyad interchangeable, or is one of them marked by
 gender, role, or time?
 
-[Read →](distinguishability.qmd)
+[Read →](distinguishability.html)
 :::
 
 ::: {.card}
@@ -44,7 +44,7 @@ gender, role, or time?
 Four ways partner and actor effects can combine — actor-only, couple,
 contrast, and mixed. How to test which pattern your data fit.
 
-[Read →](kpatterns.qmd)
+[Read →](kpatterns.html)
 :::
 
 ::: {.card}
@@ -53,7 +53,7 @@ contrast, and mixed. How to test which pattern your data fit.
 Long format (one row per person) vs. wide format (one row per dyad).
 When to use which. The general "doubling" rule.
 
-[Read →](data-structures.qmd)
+[Read →](data-structures.html)
 :::
 
 :::

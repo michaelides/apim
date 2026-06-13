@@ -63,8 +63,8 @@ have identical means, and the dyads are still distinguishable
 (because the two roles exist).
 
 The choice between the [indistinguishable
-tutorials](../tutorials/indistinguishable/index.qmd) and the
-[distinguishable tutorials](../tutorials/distinguishable/index.qmd)
+tutorials](../tutorials/indistinguishable/index.html) and the
+[distinguishable tutorials](../tutorials/distinguishable/index.html)
 is made before you open the data.
 
 ## What if you are not sure?
@@ -76,16 +76,16 @@ Two practical tests:
    unconstrained model. Run a likelihood ratio test. A non-significant
    *p*-value supports indistinguishability. (This is the
    indistinguishability test in the
-   [SEM wide tutorial](../tutorials/distinguishable/sem-wide.qmd).)
+   [SEM wide tutorial](../tutorials/distinguishable/sem-wide.html).)
 2. **MLM with gender interaction.** Fit a multilevel model with
    `gender` interacting every actor and partner predictor. A
    likelihood ratio test against the gender-free model tells you
    whether the slopes differ by gender. (This is the
-   [MLM moderator tutorial](../tutorials/distinguishable/mlm-moderator.qmd).)
+   [MLM moderator tutorial](../tutorials/distinguishable/mlm-moderator.html).)
 
 The two approaches usually agree, but if they disagree, trust the
 test that has more power for your specific design. The
-[wide-format SEM test](../tutorials/distinguishable/sem-wide.qmd)
+[wide-format SEM test](../tutorials/distinguishable/sem-wide.html)
 is the gold standard.
 
 ## References

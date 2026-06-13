@@ -23,7 +23,7 @@ SEM specifications.
 <span class="tag tag-mlm-moderated">MLM + SEM</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open tutorial →](hahn2014.qmd)
+[Open tutorial →](hahn2014.html)
 :::
 
 :::

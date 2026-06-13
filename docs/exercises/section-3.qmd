@@ -6,7 +6,7 @@ title: "Section 3 — Indistinguishable dyads: SEM"
 
 **What you are practising:** three structural equation modelling paradigms for indistinguishable dyads and the formal indistinguishability test.
 
-**Reference:** [Indistinguishable dyads: SEM tutorial](../../tutorials/indistinguishable/sem.qmd).
+**Reference:** [Indistinguishable dyads: SEM tutorial](../../tutorials/indistinguishable/sem.html).
 
 ::: {.callout-note}
 ## Goal
@@ -30,7 +30,7 @@ For each outcome, do the LRT results agree with the data-generating process (whi
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [Indistinguishable SEM](../../tutorials/indistinguishable/sem.qmd). Models A, B, and C are demonstrated in steps 1–3; the LRT is in the [SEM wide tutorial, Step "Test the equality constraint"](../../tutorials/distinguishable/sem-wide.qmd#the-three-nested-lrts).
+**Tutorial reference:** [Indistinguishable SEM](../../tutorials/indistinguishable/sem.html). Models A, B, and C are demonstrated in steps 1–3; the LRT is in the [SEM wide tutorial, Step "Test the equality constraint"](../../tutorials/distinguishable/sem-wide.html#the-three-nested-lrts).
 
 **Substitutions:**
 - `ddl` → `ddl2`, `ddw` → `ddw2`

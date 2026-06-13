@@ -6,7 +6,7 @@ title: "Section 2 — Indistinguishable dyads: MLM"
 
 **What you are practising:** the basic Actor–Partner Interdependence Model in long format, treating dyad members as exchangeable.
 
-**Reference:** [Indistinguishable dyads: MLM tutorial](../../tutorials/indistinguishable/mlm.qmd).
+**Reference:** [Indistinguishable dyads: MLM tutorial](../../tutorials/indistinguishable/mlm.html).
 
 ::: {.callout-note}
 ## Goal
@@ -32,7 +32,7 @@ For which outcome is the partner block (`partner_affect`, `partner_sdt`, `partne
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [Indistinguishable MLM](../../tutorials/indistinguishable/mlm.qmd). The full APIM pattern is in Step 2; the partner-block LRT is in Step 3.
+**Tutorial reference:** [Indistinguishable MLM](../../tutorials/indistinguishable/mlm.html). The full APIM pattern is in Step 2; the partner-block LRT is in Step 3.
 
 **Substitutions from the tutorial:**
 - `wnc` → `affect`, also add `sdt` and `job_crafting`

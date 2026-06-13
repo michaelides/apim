@@ -45,7 +45,7 @@ If you had to present this in a 5-minute conference talk, which figure and which
 
 **No single correct answer.** This section is graded on the *reasoning* and the *articulation*, not the exact numbers.
 
-**Reference tutorials:** [Section 2](../../tutorials/indistinguishable/mlm.qmd) (full APIM), [Section 4](../../tutorials/distinguishable/mlm-moderator.qmd) (gender moderation), [Section 8](../../tutorials/moderated/hahn2014.qmd) (focal interaction).
+**Reference tutorials:** [Section 2](../../tutorials/indistinguishable/mlm.html) (full APIM), [Section 4](../../tutorials/distinguishable/mlm-moderator.html) (gender moderation), [Section 8](../../tutorials/moderated/hahn2014.html) (focal interaction).
 
 **For the figure.** A two-panel plot is the standard. Left panel: the partner crossover effect at low and high levels of the moderator (slope plot). Right panel: the predicted outcome as a function of the partner predictor, with one line per moderator level. The `interactions::interact_plot()` function produces a version of the right panel automatically.
 

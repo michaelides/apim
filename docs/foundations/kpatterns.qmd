@@ -36,7 +36,7 @@ four patterns. The ratio $k = b_P / b_A$ is what the test tracks.
 | **Mixed** | $b_P \neq 0, b_A \neq 0$, not equal or opposite | Both effects are present, with different magnitudes | Stress crossover, support transactions |
 
 The fully-constrained SEM in the [SEM wide
-tutorial](../tutorials/distinguishable/sem-wide.qmd) and the
+tutorial](../tutorials/distinguishable/sem-wide.html) and the
 indistinguishability tests in the [k-patterns sense](#) generalise
 naturally: a non-significant departure from the actor-only pattern
 implies $k = 0$; from the couple pattern implies $k = 1$; from the
@@ -48,7 +48,7 @@ For each pattern, fit the constrained model and compare to a
 saturated model via a likelihood ratio test. A non-significant
 *p*-value supports the pattern. (See Fitzpatrick et al. (2016) for
 the original Mplus tutorial, replicated for `lavaan` in the
-[SEM wide tutorial](../tutorials/distinguishable/sem-wide.qmd).)
+[SEM wide tutorial](../tutorials/distinguishable/sem-wide.html).)
 
 For the **actor-only** pattern:
 

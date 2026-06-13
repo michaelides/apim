@@ -6,11 +6,11 @@ title: "Section 1 — Data simulation & inspection"
 
 **What you are practising:** orienting yourself to a new dyadic dataset before any modelling.
 
-**Reference:** [`exercises/simulate_exercise_data.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/exercises/simulate_exercise_data.R) (the DGP, no analysis code) and the [indistinguishable MLM tutorial](../../tutorials/indistinguishable/mlm.qmd#step-1-estimate-the-icc) (for the ICC helper).
+**Reference:** [`exercises/simulate_exercise_data.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/exercises/simulate_exercise_data.R) (the DGP, no analysis code) and the [indistinguishable MLM tutorial](../../tutorials/indistinguishable/mlm.html#step-1-estimate-the-icc) (for the ICC helper).
 
 ::: {.callout-note}
 ## Goal
-- Confirm that the data were generated as the [data documentation](../../data/exercise-data.qmd) describes.
+- Confirm that the data were generated as the [data documentation](../../data/exercise-data.html) describes.
 - Quantify non-independence for each outcome via the ICC.
 - Identify which variables show gender mean differences.
 :::
@@ -45,7 +45,7 @@ Which of the three outcomes shows the largest gender difference in mean, and whi
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [Indistinguishable MLM, Step 1](../../tutorials/indistinguishable/mlm.qmd#step-1-estimate-the-icc) for the ICC computation pattern. The same `icc()` helper function can be reused verbatim.
+**Tutorial reference:** [Indistinguishable MLM, Step 1](../../tutorials/indistinguishable/mlm.html#step-1-estimate-the-icc) for the ICC computation pattern. The same `icc()` helper function can be reused verbatim.
 
 **DGP intercept gaps** (from `simulate_exercise_data.R`):
 - engagement: $\alpha_m - \alpha_f = +0.15$ (males higher)

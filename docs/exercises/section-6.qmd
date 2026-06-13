@@ -6,7 +6,7 @@ title: "Section 6 — Distinguishable dyads: SEM wide"
 
 **What you are practising:** the unconstrained / slopes-equal / fully-constrained model sequence and the three nested likelihood ratio tests.
 
-**Reference:** [Distinguishable dyads: SEM wide tutorial](../../tutorials/distinguishable/sem-wide.qmd).
+**Reference:** [Distinguishable dyads: SEM wide tutorial](../../tutorials/distinguishable/sem-wide.html).
 
 ::: {.callout-note}
 ## Goal
@@ -34,7 +34,7 @@ For which outcome is the slope-equality test (LRT 1) most likely to be non-signi
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [SEM wide](../../tutorials/distinguishable/sem-wide.qmd). The three models are in the section "Model 1, 2, 3"; the LRTs are in "The three nested LRTs"; the fit-indices table is at the end.
+**Tutorial reference:** [SEM wide](../../tutorials/distinguishable/sem-wide.html). The three models are in the section "Model 1, 2, 3"; the LRTs are in "The three nested LRTs"; the fit-indices table is at the end.
 
 **Substitutions:**
 - `ddw` → `ddw2`

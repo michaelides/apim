@@ -54,7 +54,7 @@ modelling is required — every concept is introduced as it is used.
 Non-independence, the intraclass correlation, distinguishability, the
 four k-patterns, and the data structures APIM can handle.
 
-[Start here →](foundations/index.qmd)
+[Start here →](foundations/index.html)
 :::
 
 ::: {.card}
@@ -63,7 +63,7 @@ four k-patterns, and the data structures APIM can handle.
 Multilevel and SEM approaches when the two members of each dyad are
 interchangeable. Pooled slopes, no gender effect.
 
-[Tutorials →](tutorials/indistinguishable/index.qmd)
+[Tutorials →](tutorials/indistinguishable/index.html)
 :::
 
 ::: {.card}
@@ -72,7 +72,7 @@ interchangeable. Pooled slopes, no gender effect.
 Add gender (or any distinguishing variable) as a moderator. Compare
 MLM and SEM specifications. Test equality constraints.
 
-[Tutorials →](tutorials/distinguishable/index.qmd)
+[Tutorials →](tutorials/distinguishable/index.html)
 :::
 
 ::: {.card}
@@ -82,7 +82,7 @@ The full model: a dyad-level moderator (e.g. presence of children)
 shaping the partner crossover effect. Replication of Hahn, Binnewies,
 & Dormann (2014).
 
-[Tutorial →](tutorials/moderated/index.qmd)
+[Tutorial →](tutorials/moderated/index.html)
 :::
 
 ::: {.card}
@@ -92,7 +92,7 @@ A nine-section problem set on a separate simulated dataset. Each
 section asks you to fit a model, interpret it, and reflect on the
 result. Hints and worked solutions are provided.
 
-[Practise →](exercises/index.qmd)
+[Practise →](exercises/index.html)
 :::
 
 ::: {.card}
@@ -101,7 +101,7 @@ result. Hints and worked solutions are provided.
 Variable lists, data-generating parameters, and the canonical reading
 list for APIM work in the social and organisational sciences.
 
-[Browse →](data/index.qmd){.card-link} · [References →](references/index.qmd)
+[Browse →](data/index.html){.card-link} · [References →](references/index.html)
 :::
 
 :::
@@ -158,8 +158,8 @@ These materials were originally developed for the EAOHP 2026 conference
 workshop *Dyadic Data Analysis Using R*. The simulation data
 structures emulate the work of Hahn, Binnewies, & Dormann (2014). The
 APIM framework rests on the work of Kenny, Kashy, Cook, and
-Ledermann, among many others; see the [references](references/index.qmd)
+Ledermann, among many others; see the [references](references/index.html)
 for the full list.
 
-Materials are by [George Michaelides](about/index.qmd), released under
+Materials are by [George Michaelides](about/index.html), released under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

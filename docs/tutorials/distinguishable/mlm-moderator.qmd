@@ -32,7 +32,7 @@ print(table(ddl$gender))
 ## Step 1: the baseline model (no gender)
 
 The baseline is the same as the [indistinguishable
-tutorial](../indistinguishable/mlm.qmd) APIM. It estimates pooled
+tutorial](../indistinguishable/mlm.html) APIM. It estimates pooled
 slopes across gender.
 
 ```{r}
@@ -162,10 +162,10 @@ females.
 
 ## What to read next
 
-- The [SEM with moderation tutorial](sem-moderation.qmd) shows
+- The [SEM with moderation tutorial](sem-moderation.html) shows
   the same specification in `lavaan` with calculated simple
   slopes.
-- The [SEM wide tutorial](sem-wide.qmd) gives you the Olsen &
+- The [SEM wide tutorial](sem-wide.html) gives you the Olsen &
   Kenny (2006) three-model sequence and the k-pattern tests.
-- The [two-intercept tutorial](two-intercept.qmd) shows a
+- The [two-intercept tutorial](two-intercept.html) shows a
   parameterisation trick that estimates both intercepts directly.

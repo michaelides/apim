@@ -57,7 +57,7 @@ long) operation.
 
 ::: {.callout-tip}
 ## Converting with `dplyr`
-The `simulate_exercise_data.R` script in the [exercises](../exercises/index.qmd)
+The `simulate_exercise_data.R` script in the [exercises](../exercises/index.html)
 shows the standard pattern for going from long to wide with
 `tidyr::pivot_wider()` and from wide to long with
 `tidyr::pivot_longer()`.
@@ -73,19 +73,19 @@ shows the standard pattern for going from long to wide with
 | Cluster-robust standard errors in `lavaan` | long | `lavaan` accepts a `cluster` argument and treats long-format data correctly. |
 | Aggregation (e.g. computing ICC) | both | Easier in long format. |
 
-The [indistinguishable MLM tutorial](../tutorials/indistinguishable/mlm.qmd)
+The [indistinguishable MLM tutorial](../tutorials/indistinguishable/mlm.html)
 uses the long format. The [SEM wide
-tutorial](../tutorials/indistinguishable/sem.qmd) for indistinguishable
+tutorial](../tutorials/indistinguishable/sem.html) for indistinguishable
 dyads uses the wide format. The [distinguishable SEM wide
-tutorial](../tutorials/distinguishable/sem-wide.qmd) also uses wide
+tutorial](../tutorials/distinguishable/sem-wide.html) also uses wide
 format. The [SEM with moderation
-tutorial](../tutorials/distinguishable/sem-moderation.qmd) switches
+tutorial](../tutorials/distinguishable/sem-moderation.html) switches
 to long format to make the gender interaction easier to write.
 
 ## A third option: the two-intercept model
 
 For distinguishable dyads, the [two-intercept
-tutorial](../tutorials/distinguishable/two-intercept.qmd) shows a
+tutorial](../tutorials/distinguishable/two-intercept.html) shows a
 third approach: fit a single multilevel model with two intercepts
 (one per role) and constrained equal slopes. This is a special
 case of the long-format MLM that is useful when you want to report
@@ -104,7 +104,7 @@ The `exercise_data.RData` file contains:
 - `ddl2` — long format, 500 rows, 15 columns.
 - `ddw2` — wide format, 250 rows, 16 columns.
 
-Both datasets are documented in the [Data section](../data/index.qmd).
+Both datasets are documented in the [Data section](../data/index.html).
 
 ## References
 

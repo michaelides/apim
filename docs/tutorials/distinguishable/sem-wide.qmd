@@ -182,9 +182,9 @@ print(round(fit_indices, 4))
 
 ## What to read next
 
-- The [two-intercept tutorial](two-intercept.qmd) — recommended
+- The [two-intercept tutorial](two-intercept.html) — recommended
   when LRT 1 is non-significant but LRT 2 is significant (i.e.
   dyads are distinguishable by means, not effects).
 - The [Hahn et al. (2014) replication
-  tutorial](../moderated/hahn2014.qmd) — moderated APIM with a
+  tutorial](../moderated/hahn2014.html) — moderated APIM with a
   dyad-level moderator.

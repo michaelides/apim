@@ -88,7 +88,7 @@ single zip.
 Step-by-step instructions for getting set up on Windows, macOS,
 and Linux.
 
-[Open →](install.qmd)
+[Open →](install.html)
 :::
 
 ::: {.card}
@@ -97,7 +97,7 @@ and Linux.
 The recommended citation, plus citation formats for the underlying
 methods papers.
 
-[Open →](how-to-cite.qmd)
+[Open →](how-to-cite.html)
 :::
 
 :::

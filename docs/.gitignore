@@ -1,0 +1,11 @@
+/.quarto/
+**/*.quarto_ipynb
+
+# Generated site output (render with: quarto render)
+**/*.html
+/site_libs/
+/search.json
+/sitemap.xml
+/robots.txt
+/_site/
+/_freeze/

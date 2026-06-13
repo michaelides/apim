@@ -79,7 +79,7 @@ underestimated, *p*-values are too small, and you will report
 significant results that you should not.
 
 The [tutorial on indistinguishable dyads with multilevel
-modelling](../tutorials/indistinguishable/mlm.qmd) shows you how to
+modelling](../tutorials/indistinguishable/mlm.html) shows you how to
 estimate the ICC for a real dataset and how the multilevel model
 fixes the inference problem automatically.
 

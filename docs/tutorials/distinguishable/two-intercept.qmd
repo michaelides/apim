@@ -118,7 +118,7 @@ print(anova(model2_mlm, model3_mlm))
   across gender.
 
 This is the same information you would get from the [SEM wide
-three-LRT sequence](sem-wide.qmd#the-three-nested-lrts), packaged
+three-LRT sequence](sem-wide.html#the-three-nested-lrts), packaged
 as a multilevel model.
 :::
 
@@ -171,5 +171,5 @@ The `int_m` and `int_f` parameters in the SEM correspond to the
 ## What to read next
 
 - The [Hahn et al. (2014) replication
-  tutorial](../moderated/hahn2014.qmd) — the moderated APIM, the
+  tutorial](../moderated/hahn2014.html) — the moderated APIM, the
   full APIM workflow.

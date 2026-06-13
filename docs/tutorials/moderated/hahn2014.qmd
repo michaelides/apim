@@ -38,7 +38,7 @@ cat("Dyads without children: ", sum(ddw$has_children == 0), "of", nrow(ddw), "\n
 ## MLM specification
 
 The baseline APIM (no moderation) is the same as the
-[indistinguishable tutorial](../indistinguishable/mlm.qmd).
+[indistinguishable tutorial](../indistinguishable/mlm.html).
 
 ```{r}
 #| label: mlm-base
@@ -220,9 +220,9 @@ cat("  estimate =", round(sem_p_int, 4), "\n")
 
 ## What to read next
 
-- The [exercises section](../../exercises/index.qmd) has a
+- The [exercises section](../../exercises/index.html) has a
   nine-section problem set on a separate dataset with three
   outcomes and three moderators.
-- The [k-patterns page](../../foundations/kpatterns.qmd) explains
+- The [k-patterns page](../../foundations/kpatterns.html) explains
   why the simple-slope approach is more powerful than testing the
   partner effect in isolation.

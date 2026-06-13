@@ -3,7 +3,7 @@ title: "Indistinguishable dyads: SEM in wide format"
 subtitle: "Wide format, lavaan, equality-constrained actor and partner slopes"
 ---
 
-The multilevel model in the [previous tutorial](mlm.qmd) is the
+The multilevel model in the [previous tutorial](mlm.html) is the
 workhorse for APIM work, but the SEM specification is more
 transparent about *which* slopes are constrained equal, and it gives
 you standard fit indices (CFI, TLI, RMSEA, SRMR) that you can
@@ -73,7 +73,7 @@ model_indist <- '
   satisfaction). Same label = constrained equal.
 - `p_wnc` is used for the partner effect. The constraint forces
   `a_wnc = p_wnc` to be tested separately — the [distinguishable
-  SEM wide tutorial](../distinguishable/sem-wide.qmd) shows how.
+  SEM wide tutorial](../distinguishable/sem-wide.html) shows how.
 - `alpha`, `sigma2`, and `res_cov` are shared labels for the
   intercepts, residual variances, and residual covariance.
 :::
@@ -90,7 +90,7 @@ summary(fit_indist, standardized = TRUE, fit.measures = TRUE)
 
 ## Compare to the multilevel model
 
-The point estimates should match the [MLM tutorial](mlm.qmd) to
+The point estimates should match the [MLM tutorial](mlm.html) to
 three or four decimal places. The differences are in the standard
 errors (Wald vs. profile-likelihood) and in the inferential
 machinery (likelihood ratio tests in `lavaan` vs. in `lme4`).
@@ -138,7 +138,7 @@ sensitive to sample size.
 For an *indistinguishable* model on dyadic data, the SRMR is the
 most informative index. Values below 0.08 are conventionally
 considered acceptable. (See the [Hu & Bentler (1999) cutoffs
-discussion](../../references/index.qmd) for context.)
+discussion](../../references/index.html) for context.)
 
 ## Test the equality constraint
 
@@ -173,7 +173,7 @@ lavTestLRT(fit_unconstrained, fit_indist)
 
 A non-significant *p*-value supports indistinguishability. In our
 data, the equality constraint is tenable, which is consistent with
-the [data-generating process](../../data/dyad-data.qmd) (equal
+the [data-generating process](../../data/dyad-data.html) (equal
 slopes across gender).
 
 ## What to take away
@@ -192,9 +192,9 @@ slopes across gender).
 ## What to read next
 
 - The [distinguishable SEM wide
-  tutorial](../distinguishable/sem-wide.qmd) generalises this
+  tutorial](../distinguishable/sem-wide.html) generalises this
   specification to the three-model sequence (unconstrained →
   slopes-equal → fully constrained) and adds the k-pattern tests.
 - The [SEM with moderation
-  tutorial](../distinguishable/sem-moderation.qmd) shows how to
+  tutorial](../distinguishable/sem-moderation.html) shows how to
   add gender × predictor interactions at the within-dyad level.

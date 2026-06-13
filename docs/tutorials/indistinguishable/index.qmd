@@ -29,7 +29,7 @@ the partner block. Profile-likelihood confidence intervals.
 <span class="tag tag-mlm">MLM</span>
 <span class="tag tag-beginner">Beginner</span>
 
-[Open tutorial →](mlm.qmd)
+[Open tutorial →](mlm.html)
 :::
 
 ::: {.card}
@@ -42,7 +42,7 @@ ratio test against the unconstrained model.
 <span class="tag tag-sem">SEM</span>
 <span class="tag tag-intermediate">Intermediate</span>
 
-[Open tutorial →](sem.qmd)
+[Open tutorial →](sem.html)
 :::
 
 :::
@@ -65,4 +65,4 @@ are equal in the data-generating process. The two approaches should
 give you identical point estimates, but the SEM is more flexible
 (it can test the equality of slopes via an LRT against the
 unconstrained model — see the [distinguishable SEM wide
-tutorial](../distinguishable/sem-wide.qmd) for that).
+tutorial](../distinguishable/sem-wide.html) for that).

@@ -6,7 +6,7 @@ title: "Section 4 — Distinguishable dyads: MLM moderator"
 
 **What you are practising:** adding `gender` as a moderator of actor and partner effects in a multilevel model.
 
-**Reference:** [Distinguishable dyads: MLM moderator tutorial](../../tutorials/distinguishable/mlm-moderator.qmd).
+**Reference:** [Distinguishable dyads: MLM moderator tutorial](../../tutorials/distinguishable/mlm-moderator.html).
 
 ::: {.callout-note}
 ## Goal
@@ -32,7 +32,7 @@ The data-generating process specifies that only `actor_sdt × gender_male` on `e
 ::: {.callout-tip collapse="true"}
 ## Hints & solution outline
 
-**Tutorial reference:** [MLM moderator](../../tutorials/distinguishable/mlm-moderator.qmd). The model syntax is in Step 2; the LRT is in Step 3; the simple slopes are in Step 4.
+**Tutorial reference:** [MLM moderator](../../tutorials/distinguishable/mlm-moderator.html). The model syntax is in Step 2; the LRT is in Step 3; the simple slopes are in Step 4.
 
 **Substitutions:**
 - `ddl` → `ddl2`

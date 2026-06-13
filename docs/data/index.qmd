@@ -28,7 +28,7 @@ two outcomes (relationship satisfaction), two predictors (WNC,
 recovery), two dyad-level covariates (has_children, dual_earner),
 and a gender distinction.
 
-[Details →](dyad-data.qmd)
+[Details →](dyad-data.html)
 :::
 
 ::: {.card}
@@ -39,7 +39,7 @@ outcomes (engagement, performance, creativity), three predictors
 (affect, sdt, job_crafting), and three moderators (live_together,
 years_together, time_spent_this_morning_together).
 
-[Details →](exercise-data.qmd)
+[Details →](exercise-data.html)
 :::
 
 :::
@@ -72,4 +72,4 @@ also exposes a `make data` target that runs both scripts.
 The `dyad_data.RData` structure emulates the design of Hahn,
 Binnewies, & Dormann (2014). The `exercise_data.RData` structure
 emulates crossover research in work and organisational psychology.
-The full citation list is in the [references](../references/index.qmd).
+The full citation list is in the [references](../references/index.html).

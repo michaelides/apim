@@ -42,7 +42,7 @@ The foundational paper that articulated APIM in psychology.
 testing dyadic patterns in the Actor–Partner Interdependence Model.
 *Journal of Family Psychology, 24*(3), 359–366.
 
-Introduces the [k-pattern tests](../foundations/kpatterns.qmd)
+Introduces the [k-pattern tests](../foundations/kpatterns.html)
 (actor-only, couple, contrast) used to interpret APIM effects.
 :::
 
@@ -76,7 +76,7 @@ with interchangeable dyads. *Psychological Methods, 11*(2), 127–141.
 
 SEM specification for *indistinguishable* dyads — underpins the
 wide-format `lavaan` syntax in the [SEM wide
-tutorial](../tutorials/indistinguishable/sem.qmd).
+tutorial](../tutorials/indistinguishable/sem.html).
 :::
 
 ## Worked SEM tutorial (k-pattern tests)
@@ -89,7 +89,7 @@ estimate different dyadic patterns in Mplus: A step-by-step tutorial.
 
 Worked SEM tutorial on the k-pattern tests; closely parallels the
 [`lavaan` scripts in the SEM wide
-tutorial](../tutorials/distinguishable/sem-wide.qmd) (despite the
+tutorial](../tutorials/distinguishable/sem-wide.html) (despite the
 Mplus label, the model specification is identical).
 :::
 
@@ -139,7 +139,7 @@ Vocational Behavior, 85*(1), 39–48.
 
 The applied example our scripts emulate — reproduced in the
 [Hahn et al. (2014) replication
-tutorial](../tutorials/moderated/hahn2014.qmd).
+tutorial](../tutorials/moderated/hahn2014.html).
 :::
 
 ## Local materials

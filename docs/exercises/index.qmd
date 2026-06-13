@@ -3,11 +3,11 @@ title: "Exercises"
 subtitle: "A nine-section problem set on a second dyadic dataset"
 ---
 
-These exercises ask you to apply every method in the [tutorials](../../tutorials/indistinguishable/index.qmd) to a *new* dyadic dataset. The dataset has three outcomes, three predictors, and three dyad-level moderators, so each analytic step has to be repeated three times — once per outcome. That repetition is the point: in real research, you fit the same model several times and interpret each fit in light of the data-generating process.
+These exercises ask you to apply every method in the [tutorials](../../tutorials/indistinguishable/index.html) to a *new* dyadic dataset. The dataset has three outcomes, three predictors, and three dyad-level moderators, so each analytic step has to be repeated three times — once per outcome. That repetition is the point: in real research, you fit the same model several times and interpret each fit in light of the data-generating process.
 
 ::: {.callout-important}
 ## Before you start
-- The exercise dataset is [`data/exercise_data.RData`](../../data/exercise-data.qmd). It is *different* from the tutorial dataset. Read its [documentation](../../data/exercise-data.qmd) first.
+- The exercise dataset is [`data/exercise_data.RData`](../../data/exercise-data.html). It is *different* from the tutorial dataset. Read its [documentation](../../data/exercise-data.html) first.
 - Each section has a collapsible **Hints & solution outline** block at the bottom. Open it only after you have produced the model and your one-sentence interpretation.
 - The reflection prompts are the most important part. The numerical answers are reproducible from the DGP; your *interpretation* is what the exercise is testing.
 :::
@@ -25,7 +25,7 @@ identify which variables show gender mean differences.
 
 <span class="tag tag-beginner">Beginner</span>
 
-[Open section →](section-1.qmd)
+[Open section →](section-1.html)
 :::
 
 ::: {.card}
@@ -38,7 +38,7 @@ baseline, and write a two-sentence interpretation.
 <span class="tag tag-mlm">MLM</span>
 <span class="tag tag-intermediate">Intermediate</span>
 
-[Open section →](section-2.qmd)
+[Open section →](section-2.html)
 :::
 
 ::: {.card}
@@ -51,7 +51,7 @@ equality-constrained model. The formal indistinguishability test.
 <span class="tag tag-sem">SEM</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open section →](section-3.qmd)
+[Open section →](section-3.html)
 :::
 
 ::: {.card}
@@ -63,7 +63,7 @@ simple slopes to extract the conditional effects for each gender.
 <span class="tag tag-mlm-moderator">MLM + gender</span>
 <span class="tag tag-intermediate">Intermediate</span>
 
-[Open section →](section-4.qmd)
+[Open section →](section-4.html)
 :::
 
 ::: {.card}
@@ -75,7 +75,7 @@ within-dyad level. Calculated simple slopes in `lavaan`.
 <span class="tag tag-sem-moderation">SEM + gender</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open section →](section-5.qmd)
+[Open section →](section-5.html)
 :::
 
 ::: {.card}
@@ -87,7 +87,7 @@ sequence and the three nested likelihood ratio tests.
 <span class="tag tag-sem-wide">SEM wide</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open section →](section-6.qmd)
+[Open section →](section-6.html)
 :::
 
 ::: {.card}
@@ -99,7 +99,7 @@ their LRTs. The SEM analogue.
 <span class="tag tag-mlm-two-intercept">Two-intercept</span>
 <span class="tag tag-intermediate">Intermediate</span>
 
-[Open section →](section-7.qmd)
+[Open section →](section-7.html)
 :::
 
 ::: {.card}
@@ -112,7 +112,7 @@ the moderator.
 <span class="tag tag-mlm-moderated">MLM + SEM</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open section →](section-8.qmd)
+[Open section →](section-8.html)
 :::
 
 ::: {.card}
@@ -124,7 +124,7 @@ paragraph.
 
 <span class="tag tag-advanced">Advanced</span>
 
-[Open section →](section-9.qmd)
+[Open section →](section-9.html)
 :::
 
 :::
@@ -143,6 +143,6 @@ paragraph.
 
 ## Suggested order
 
-Sections 1–8 follow the same order as the [tutorials](../../tutorials/indistinguishable/index.qmd). Section 9 is the integrative capstone — do it last.
+Sections 1–8 follow the same order as the [tutorials](../../tutorials/indistinguishable/index.html). Section 9 is the integrative capstone — do it last.
 
 If you are short on time, the minimum useful set is **1, 2, 4, 8**: data inspection, indistinguishable MLM, gender moderator, and the moderated APIM. These four cover roughly 80% of what you will need in your own research.

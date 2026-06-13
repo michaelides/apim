@@ -77,14 +77,14 @@ header. Your estimates should be close to these.
 
 - **Equal slopes across gender, different intercepts.** This makes
   indistinguishability an *empirical* question, not a property of
-  the data. The [k-patterns](../foundations/kpatterns.qmd) page
+  the data. The [k-patterns](../foundations/kpatterns.html) page
   discusses why this matters.
 - **Within-dyad correlations induced by correlated residuals**
   (`correlate_errors()` in the script). The dyad members are
   correlated for both substantive and methodological reasons.
 - **Children as a moderator.** The `int_child_pwnc = 0.10` parameter
   is the headline effect in the [Hahn et al. (2014) replication
-  tutorial](../tutorials/moderated/hahn2014.qmd). It represents the
+  tutorial](../tutorials/moderated/hahn2014.html). It represents the
   finding that children buffer the partner crossover effect.
 
 ## Reproducibility

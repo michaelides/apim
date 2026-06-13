@@ -157,7 +157,7 @@ especially for the variance components.
 The two predictors of substantive interest — WNC and recovery —
 both show a clear actor effect and a smaller partner effect, in
 the same direction. The actor effects are about twice the partner
-effects, which is close to a [couple pattern](../../foundations/kpatterns.qmd)
+effects, which is close to a [couple pattern](../../foundations/kpatterns.html)
 with $k \approx 0.5$.
 
 ## Step 3: test whether the partner block is needed
@@ -238,12 +238,12 @@ print(round(ci, 4))
 
 ## What to read next
 
-- The [SEM wide tutorial](sem.qmd) fits the same model in `lavaan`
+- The [SEM wide tutorial](sem.html) fits the same model in `lavaan`
   with explicit equality constraints. You will see the same point
   estimates, plus a likelihood ratio test of the equality constraint.
 - The [distinguishable MLM
-  tutorial](../distinguishable/mlm-moderator.qmd) relaxes the
+  tutorial](../distinguishable/mlm-moderator.html) relaxes the
   equality of slopes and adds gender as a moderator.
 - The [Hahn et al. (2014) replication
-  tutorial](../moderated/hahn2014.qmd) adds the children ×
+  tutorial](../moderated/hahn2014.html) adds the children ×
   partner-WNC moderation.

@@ -25,7 +25,7 @@ the gender × predictor interaction block.
 <span class="tag tag-mlm-moderator">MLM + gender</span>
 <span class="tag tag-intermediate">Intermediate</span>
 
-[Open tutorial →](mlm-moderator.qmd)
+[Open tutorial →](mlm-moderator.html)
 :::
 
 ::: {.card}
@@ -38,7 +38,7 @@ Calculated simple slopes.
 <span class="tag tag-sem-moderation">SEM + gender</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open tutorial →](sem-moderation.qmd)
+[Open tutorial →](sem-moderation.html)
 :::
 
 ::: {.card}
@@ -51,7 +51,7 @@ ratio tests. The Olsen & Kenny (2006) indistinguishability test.
 <span class="tag tag-sem-wide">SEM wide</span>
 <span class="tag tag-advanced">Advanced</span>
 
-[Open tutorial →](sem-wide.qmd)
+[Open tutorial →](sem-wide.html)
 :::
 
 ::: {.card}
@@ -64,7 +64,7 @@ Its SEM analogue in wide format.
 <span class="tag tag-mlm-two-intercept">Two-intercept</span>
 <span class="tag tag-intermediate">Intermediate</span>
 
-[Open tutorial →](two-intercept.qmd)
+[Open tutorial →](two-intercept.html)
 :::
 
 :::
@@ -102,14 +102,14 @@ difference: a 0.15-point gap in the male and female intercepts
 ($\alpha_m = 5.00$, $\alpha_f = 4.85$). The actor and partner slopes
 are *equal* across gender in the DGP. This means:
 
-- The [MLM moderator](mlm-moderator.qmd) likelihood ratio test
+- The [MLM moderator](mlm-moderator.html) likelihood ratio test
   should *not* reject the null of no gender × predictor interaction.
-- The [SEM wide](sem-wide.qmd) slope-equality test should be
+- The [SEM wide](sem-wide.html) slope-equality test should be
   non-significant.
-- The [SEM wide](sem-wide.qmd) intercept-equality test *should* be
+- The [SEM wide](sem-wide.html) intercept-equality test *should* be
   significant, because the male and female intercepts differ by 0.15.
 
 This is the standard empirical pattern: dyad members are
 distinguishable by *means* but not by *effects*. The [two-intercept
-tutorial](two-intercept.qmd) is the recommended specification for
+tutorial](two-intercept.html) is the recommended specification for
 this case.
