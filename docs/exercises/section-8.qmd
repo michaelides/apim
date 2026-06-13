@@ -1,0 +1,44 @@
+---
+title: "Section 8 — Moderated APIM (the centrepiece)"
+---
+
+# Section 8 — Moderated APIM (the centrepiece)
+
+**What you are practising:** testing whether the partner crossover effect on each outcome is moderated by a dyad-level variable, using both multilevel modelling and SEM.
+
+**Reference:** [Hahn et al. (2014) replication tutorial](../../tutorials/moderated/hahn2014.qmd).
+
+::: {.callout-note}
+## Focal interactions to test
+
+| Outcome | Focal partner predictor | Focal moderator | DGP interaction |
+|---|---|---|---|
+| `engagement` | `partner_job_crafting` | `live_together` | partner_jc × live_together = 0.15 |
+| `performance` | `partner_sdt` | `years_together` | partner_sdt × years_together = 0.015 |
+| `creativity` | `partner_affect` | `time_spent_this_morning_together` | partner_affect × time = 0.003 |
+:::
+
+## Tasks
+
+1. **MLM.** For each outcome, fit a baseline multilevel model (the full APIM from Section 2) and a moderated model that includes the focal partner-by-moderator interaction. Use `interactions::sim_slopes()` to extract the partner predictor's effect at low and high levels of the focal moderator. Run the LRT comparing base to moderated.
+
+2. **SEM.** For each outcome, build the corresponding wide-format SEM with a manually created product indicator and computed simple-slope parameters. Compare the simple-slope estimates with the MLM.
+
+## Reflection prompt
+
+Compare the MLM and SEM simple-slope estimates for each outcome. Where do they differ, and is the difference larger when the moderator is binary (`live_together`) or continuous (`years_together`, `time_spent_this_morning_together`)? Why might that be?
+
+::: {.callout-tip collapse="true"}
+## Hints & solution outline
+
+**Tutorial reference:** [Hahn et al. (2014) tutorial](../../tutorials/moderated/hahn2014.qmd). The MLM moderation is in "MLM specification"; the SEM moderation is in "SEM specification (wide format)"; the comparison is in "Compare MLM and SEM".
+
+**Substitutions:**
+- `partner_wnc:has_children` → focal partner × focal moderator for each outcome
+- `wnc:has_children` → focal actor × focal moderator (test jointly with the partner interaction)
+- The wide-format SEM needs the manual product indicators: `ddw2$engagement_jc_livetogether` etc.
+
+**What to expect.** All three focal interactions are non-zero in the DGP, so all three LRTs should reject. The simple-slope estimates for the partner effect should differ at low and high levels of the moderator. The MLM and SEM should agree closely. The continuous moderators should give a wider simple-slope interval than the binary `live_together`, because the low/high values of a continuous variable (e.g. mean ± 1 SD) are more conservative.
+
+**What to record.** For each outcome: *"LRT for [focal interaction]: χ² = XX.X, df = 1, p = .XXXX. Partner slope at low moderator = X.XX; at high moderator = X.XX."*
+:::

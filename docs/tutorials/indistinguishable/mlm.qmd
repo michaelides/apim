@@ -1,0 +1,249 @@
+---
+title: "Indistinguishable dyads: multilevel modelling"
+subtitle: "Long format, lme4, random intercept per dyad"
+---
+
+The most common way to fit an APIM in R is with a multilevel model
+in long format. The random intercept for `dyad_id` accounts for the
+non-independence within dyads. Slopes are constrained to be equal
+across dyad members by the data layout itself — the same variable
+name appears for both members.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(lme4)
+library(lmerTest)
+library(dplyr)
+
+# Load the long-format data
+load("../../../data/dyad_data.RData")
+
+cat("Long format:", nrow(ddl), "rows,", ncol(ddl), "columns\n")
+cat("Dyads:    ", length(unique(ddl$dyad_id)), "\n")
+cat("Persons:  ", nrow(ddl), "\n")
+```
+
+## Step 1: estimate the ICC
+
+Before any APIM, fit a null model and read the intraclass correlation.
+This is the proportion of outcome variance that lives *between*
+dyads.
+
+```{r}
+#| label: null-model
+
+null_model <- lmer(satisfaction ~ 1 + (1 | dyad_id), data = ddl)
+summary(null_model)
+```
+
+Look at the `summary()` output. The random-effects section reports two
+variance components: the `dyad_id` variance ($\tau^2$, the between-dyad
+variance in satisfaction intercepts) and the `Residual` variance
+($\sigma^2$, the within-dyad variance). Together they partition the
+total satisfaction variance into a part that is shared within each dyad
+and a part that is unique to each individual. The fixed-effects intercept
+(~4.92) is the estimated grand mean of satisfaction, pooled across all
+200 individuals, before any predictors enter.
+
+::: {.callout-tip}
+## Reading the variance components
+The `Groups` column shows the random-effect variance. `dyad_id`
+is `tau^2`, the variance of the dyad-level random intercept.
+`Residual` is `sigma^2`, the within-dyad residual variance.
+
+The ICC is `tau^2 / (tau^2 + sigma^2)`. With our data, expect
+something close to 0.25 — a quarter of satisfaction variance is
+shared by the two members of each dyad.
+:::
+
+```{r}
+#| label: icc
+
+varcomp <- as.data.frame(VarCorr(null_model))
+tau2  <- varcomp$vcov[varcomp$grp == "dyad_id"]
+sigma2 <- varcomp$vcov[varcomp$grp == "Residual"]
+icc   <- tau2 / (tau2 + sigma2)
+
+cat("\nICC:", round(icc, 4), "\n")
+cat("Interpretation: ", round(icc * 100, 1),
+    "% of satisfaction variance is shared within dyads.\n", sep = "")
+```
+
+An ICC of this size is a clear signal that the dyad is the proper
+unit of analysis. Standard OLS would underestimate standard errors
+by roughly 15–20% on these data.
+
+::: {.callout-note collapse="false"}
+## What this ICC means in practice
+
+An ICC of roughly 0.25 says that a quarter of the variation in
+relationship satisfaction is driven by factors that the two partners
+share — their household, their relationship history, their joint
+financial circumstances. The remaining three-quarters is individual-level
+variation: one partner's personal stressors, their own recovery habits,
+their measurement error. If you had ignored the dyad structure and run a
+standard OLS regression, the effective sample size would be roughly
+$200 / (1 + 1 \times 0.25) \approx 160$ — you would have overstated your
+precision by about 25% and inflated your Type I error rate. The random
+intercept for `dyad_id` is the minimum fix.
+:::
+
+## Step 2: the full APIM
+
+The full APIM in long format looks like a regression of satisfaction
+on the actor's predictors, the partner's predictors, and any
+dyad-level covariates, with a random intercept for dyad.
+
+```{r}
+#| label: apim
+
+apim_mlm <- lmer(
+  satisfaction ~ wnc + partner_wnc + recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(apim_mlm)
+```
+
+::: {.callout-tip}
+## Reading the coefficients
+
+Scan the fixed-effects table from the `summary()` output and compare each
+coefficient to the known DGP value. The actor WNC effect (`wnc`) should
+land near −0.30 — a one-unit increase in a person's own work–nonwork
+conflict is associated with a 0.30-unit decrease in their own
+relationship satisfaction, holding all else constant. The partner WNC
+effect (`partner_wnc`) should land near −0.15 — half the magnitude of the
+actor effect, but in the same direction. This is the partner *crossover*:
+my partner's stress spills over and worsens my satisfaction, even after
+controlling for my own stress. The actor recovery effect (`recovery`,
+near +0.25) and partner recovery effect (`partner_recovery`, near +0.10)
+tell the mirror story: recovery buffers satisfaction, and a partner's
+recovery buffers mine too.
+
+The two dyad-level covariates are interpretable as between-dyad
+contrasts. `has_children` (near −0.10) means that, on average, couples
+with children score about 0.10 points lower on satisfaction than couples
+without, controlling for WNC and recovery. `dual_earner` (near +0.20)
+means that dual-earner couples score higher — a compositional effect
+consistent with higher resources buffering relationship strain. These
+coefficients are estimated entirely from the 100 dyad-level observations,
+so their standard errors are wider than the actor effects, which borrow
+strength from 200 person-level observations.
+
+The `lmerTest` package adds Satterthwaite-approximated degrees of freedom
+and p-values to the `lme4` output. These p-values are approximate — do
+not treat them as exact. For reporting, prefer the profile-likelihood
+confidence intervals in Step 4; they are more accurate for mixed models,
+especially for the variance components.
+
+- `wnc` is the **actor** effect of WNC: how much the actor's own
+  WNC affects their own satisfaction. The point estimate should be
+  close to the DGP value of `−0.30`.
+- `partner_wnc` is the **partner** effect: how much the partner's
+  WNC affects the actor's satisfaction. The point estimate should
+  be close to `−0.15`.
+- `recovery` and `partner_recovery` follow the same pattern.
+- `has_children` and `dual_earner` are dyad-level covariates with
+  no partner split.
+:::
+
+The two predictors of substantive interest — WNC and recovery —
+both show a clear actor effect and a smaller partner effect, in
+the same direction. The actor effects are about twice the partner
+effects, which is close to a [couple pattern](../../foundations/kpatterns.qmd)
+with $k \approx 0.5$.
+
+## Step 3: test whether the partner block is needed
+
+The `anova()` output for `lme4` models reports the log-likelihood of each
+model, the chi-square statistic ($\chi^2 = 2(\ell_{\text{full}} -
+\ell_{\text{reduced}})$), the degrees of freedom (the number of
+constrained parameters — here, both partner effects are constrained to
+zero, so 2 df), and the p-value. A significant p-value means the partner
+block is jointly needed: at least one of `partner_wnc` or
+`partner_recovery` has a non-zero effect on satisfaction. A
+non-significant p-value would mean the dyad is effectively an
+actor-effects-only system, which would be a substantively important null
+result — it would mean stress does not cross over between partners.
+
+In our data, the LRT should be significant. The DGP has `p_wnc = −0.15`
+and `p_rec = +0.10`, both non-zero. The test has adequate power at
+N = 100 dyads to detect partner effects of these magnitudes.
+
+Compare the full APIM to a reduced model that omits the partner
+predictors. The likelihood ratio test tells you whether the partner
+block is jointly useful.
+
+```{r}
+#| label: lrt-partner
+
+actor_only <- lmer(
+  satisfaction ~ wnc + recovery + has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+anova(actor_only, apim_mlm)
+```
+
+
+Profile-likelihood confidence intervals are the reporting standard for
+mixed models because they account for the asymmetry of the likelihood
+surface — Wald intervals assume the surface is quadratic, which is
+reasonable for fixed effects but poor for variance components. Scan the
+output for the intervals that exclude zero: `wnc`, `partner_wnc`,
+`recovery`, and `partner_recovery` should all have confidence limits
+that do not cross zero, confirming that both actor and partner effects
+are reliably non-zero. The dyad-level covariates (`has_children`,
+`dual_earner`) may have intervals that cross zero because they are
+estimated from only 100 dyad-level observations. The random-intercept
+standard deviation (`.sig01`) and residual standard deviation (`.sigma`)
+are reported on the standard-deviation scale; their intervals should be
+well above zero, confirming that both variance components are real.
+
+## Step 4: profile-likelihood confidence intervals
+
+Wald confidence intervals are faster to compute but less accurate
+for variance components. Profile-likelihood intervals are the
+standard for reporting.
+
+```{r}
+#| label: profile-ci
+
+ci <- confint(apim_mlm, method = "profile")
+print(round(ci, 4))
+```
+
+## What to take away
+
+::: {.callout-takeaway}
+## Key takeaways
+
+- A random intercept for `dyad_id` is the minimum adjustment for
+  dyadic non-independence. It corrects the standard errors and
+  gives you the ICC for free.
+- In long format, equal actor and partner slopes is the *default*,
+  not a constraint you impose. The same variable name plays both
+  roles.
+- The partner effects in our simulated data are about half the
+  size of the actor effects, with the same sign. This is a
+  weak-couple pattern.
+:::
+
+## What to read next
+
+- The [SEM wide tutorial](sem.qmd) fits the same model in `lavaan`
+  with explicit equality constraints. You will see the same point
+  estimates, plus a likelihood ratio test of the equality constraint.
+- The [distinguishable MLM
+  tutorial](../distinguishable/mlm-moderator.qmd) relaxes the
+  equality of slopes and adds gender as a moderator.
+- The [Hahn et al. (2014) replication
+  tutorial](../moderated/hahn2014.qmd) adds the children ×
+  partner-WNC moderation.

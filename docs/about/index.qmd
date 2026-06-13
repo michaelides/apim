@@ -1,0 +1,103 @@
+---
+title: "About"
+subtitle: "Author, origin, and how to run this site yourself"
+---
+
+## Author
+
+**George Michaelides** is the author of these materials. They were
+originally developed for the EAOHP 2026 conference workshop *Dyadic
+Data Analysis Using R*, and have been reissued in this form for a
+wider audience. The simulation data structures emulate the work of
+Hahn, Binnewies, & Dormann (2014).
+
+## Origin
+
+These materials began as a half-day workshop delivered at the
+European Academy of Occupational Health Psychology (EAOHP) 2026
+conference. The workshop paired eight R scripts (one per analytic
+approach) with a 32-slide deck and a nine-section exercise set. The
+present site is the workshop's self-contained reissue: it is
+designed to be usable on its own, with no reference to the original
+workshop, and no assumption that the reader attended.
+
+## Licensing
+
+All written material on this site is released under [CC BY
+4.0](https://creativecommons.org/licenses/by/4.0/). You are free to
+share and adapt the material for any purpose, including
+commercially, as long as you give appropriate credit. The R code
+(scripts in [`scripts/`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/scripts)
+and [`exercises/`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/exercises))
+is released under the [MIT
+License](https://github.com/example/dyadic-data-analysis-in-r/blob/main/LICENSE).
+
+## How to cite
+
+If you use these materials in your teaching or research, please cite
+the site as:
+
+> Michaelides, G. (2026). *Dyadic Data Analysis in R.* Online at
+> <https://example.com/dyadic-data-analysis-in-r>. CC BY 4.0.
+
+## How to run this site yourself
+
+The site is a Quarto project. The full source is in the [GitHub
+repository](https://github.com/example/dyadic-data-analysis-in-r).
+To run it locally:
+
+::: {.callout-note}
+## Prerequisites
+- R ≥ 4.2
+- Quarto ≥ 1.4
+- The R packages: `lme4`, `lmerTest`, `lavaan`, `dplyr`, `tibble`, `interactions`, `semPlot`, `knitr`, `rmarkdown`
+:::
+
+```bash
+# Clone the repository
+git clone https://github.com/example/dyadic-data-analysis-in-r.git
+cd dyadic-data-analysis-in-r
+
+# Install the R dependencies
+make deps
+
+# Generate the simulated data (or skip this — the site ships with the data)
+make data
+
+# Live-preview the site
+make preview
+# Opens http://localhost:4200 in your browser
+
+# Build the static site
+make site
+# Output: docs/_site/
+```
+
+The [`Makefile`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/Makefile)
+also exposes a `make bundle` target that packages the offline
+workshop (decks, scripts, exercises, data, references) into a
+single zip.
+
+## Pages
+
+::: {.card-grid}
+
+::: {.card}
+### [Installing R and the required packages]{.card-title-link}
+
+Step-by-step instructions for getting set up on Windows, macOS,
+and Linux.
+
+[Open →](install.qmd)
+:::
+
+::: {.card}
+### [Citing this site]{.card-title-link}
+
+The recommended citation, plus citation formats for the underlying
+methods papers.
+
+[Open →](how-to-cite.qmd)
+:::
+
+:::

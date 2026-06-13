@@ -1,0 +1,58 @@
+---
+title: "Citing this site"
+---
+
+## The site
+
+If you use these materials in your teaching or research, please cite
+the site as:
+
+> Michaelides, G. (2026). *Dyadic Data Analysis in R.* Online at
+> <https://example.com/dyadic-data-analysis-in-r>. CC BY 4.0.
+
+A BibTeX entry:
+
+```bibtex
+@misc{michaelides2026dyadic,
+  author = {Michaelides, George},
+  title  = {Dyadic Data Analysis in R},
+  year   = {2026},
+  url    = {https://example.com/dyadic-data-analysis-in-r},
+  note   = {CC BY 4.0}
+}
+```
+
+## The underlying methods
+
+The methods on this site rest on the work of many researchers. The
+key citations are:
+
+- **APIM framework:** Kenny, Kashy, & Cook (2006) *Dyadic data
+  analysis.* Guilford Press. — the primary textbook.
+- **k-pattern tests:** Kenny & Ledermann (2010). *Journal of Family
+  Psychology, 24*(3), 359–366.
+- **Wide-format SEM for indistinguishable dyads:** Olsen & Kenny
+  (2006). *Psychological Methods, 11*(2), 127–141.
+- **R SEM engine:** Rosseel (2012). *Journal of Statistical
+  Software, 48*(2), 1–36.
+- **R multilevel engine:** Bates et al. (2015). *Journal of
+  Statistical Software, 67*(1), 1–48.
+
+The full reference list is on the [references page](../references/index.qmd).
+
+## The applied example
+
+The simulated data structure on this site emulates:
+
+- **Hahn, V. C., Binnewies, C., & Dormann, C. (2014).** The role of
+  partners and children for employees' daily recovery. *Journal of
+  Vocational Behavior, 85*(1), 39–48.
+
+If you are writing a research paper whose methods section uses the
+APIM, citing Hahn et al. (2014) is appropriate when the structure
+of your data is similar to theirs.
+
+## Licensing
+
+The written material is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The R code is released under the [MIT License](https://github.com/example/dyadic-data-analysis-in-r/blob/main/LICENSE).

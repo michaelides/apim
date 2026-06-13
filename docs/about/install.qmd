@@ -1,0 +1,95 @@
+---
+title: "Installing R and the required packages"
+---
+
+## R
+
+Install R from the [Comprehensive R Archive Network
+(CRAN)](https://cran.r-project.org/). Choose the binary
+distribution for your operating system.
+
+- **Windows / macOS:** download the installer from CRAN.
+- **Linux:** use your distribution's package manager. On Debian /
+  Ubuntu:
+  ```bash
+  sudo apt install r-base r-base-dev
+  ```
+
+## RStudio (recommended IDE)
+
+[RStudio Desktop](https://posit.co/download/rstudio-desktop/) is a
+free IDE that integrates R, Quarto, and a markdown editor. It is the
+recommended way to run the tutorials on this site.
+
+## Quarto
+
+Install Quarto from [quarto.org](https://quarto.org/docs/get-started/).
+The current version (1.4 or later) is required.
+
+## R packages
+
+Install the R packages used by the tutorials with:
+
+```r
+install.packages(c(
+  "lme4",      # multilevel models
+  "lmerTest",  # p-values and profile CIs for lme4
+  "lavaan",    # structural equation modelling
+  "dplyr",     # data manipulation
+  "tibble",    # modern data frames
+  "interactions",  # simple-slopes and interaction plots
+  "semPlot",   # SEM path diagrams (used in some tutorials)
+  "knitr",     # chunk engine for Quarto / R Markdown
+  "rmarkdown"  # document rendering
+), repos = "https://cloud.r-project.org")
+```
+
+The `make deps` target in the [`Makefile`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/Makefile)
+runs the same command.
+
+## Verifying the install
+
+In a fresh R session, run:
+
+```r
+library(lme4)
+library(lmerTest)
+library(lavaan)
+library(dplyr)
+library(interactions)
+```
+
+If all six lines return without error, your install is complete.
+
+## Troubleshooting
+
+### `lavaan` fails to load on Linux
+
+`lavaan` depends on system-level BLAS / LAPACK libraries. On
+Debian / Ubuntu, install them with:
+
+```bash
+sudo apt install libblas-dev liblapack-dev
+```
+
+### `interactions` cannot find `sim_slopes`
+
+The `sim_slopes` function lives in the `interactions` package. If
+you have a typo or an older version, install the latest:
+
+```r
+install.packages("interactions", repos = "https://cloud.r-project.org")
+```
+
+### Quarto cannot find R
+
+If `quarto render` fails with *"cannot find R"*, set the
+`QUARTO_R` environment variable to the path of your R binary:
+
+```bash
+# macOS / Linux
+export QUARTO_R=/usr/local/bin/R
+
+# Windows (PowerShell)
+$env:QUARTO_R = "C:\Program Files\R\R-4.3.0\bin\R.exe"
+```

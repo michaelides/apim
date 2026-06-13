@@ -1,0 +1,60 @@
+---
+title: "Section 1 — Data simulation & inspection"
+---
+
+# Section 1 — Data simulation & inspection
+
+**What you are practising:** orienting yourself to a new dyadic dataset before any modelling.
+
+**Reference:** [`exercises/simulate_exercise_data.R`](https://github.com/example/dyadic-data-analysis-in-r/blob/main/exercises/simulate_exercise_data.R) (the DGP, no analysis code) and the [indistinguishable MLM tutorial](../../tutorials/indistinguishable/mlm.qmd#step-1-estimate-the-icc) (for the ICC helper).
+
+::: {.callout-note}
+## Goal
+- Confirm that the data were generated as the [data documentation](../../data/exercise-data.qmd) describes.
+- Quantify non-independence for each outcome via the ICC.
+- Identify which variables show gender mean differences.
+:::
+
+## Tasks
+
+1. **Read the DGP.** Open `exercises/simulate_exercise_data.R` and read the header (approximately lines 1–60). Note the data-generating parameters for the three outcomes and the focal moderated-crossover effects.
+
+2. **Re-generate the data.** Run the simulation script to create or re-create `data/exercise_data.RData`. In a fresh R session, load the data and confirm that `ddl2` and `ddw2` are in the workspace.
+
+3. **ICC for each outcome.** For each of the three outcomes (`engagement`, `performance`, `creativity`), fit a null multilevel model with a random intercept for `dyad_id` and compute the ICC. The ICC tells you the proportion of outcome variance shared within dyads. Expect all three ICCs to be greater than 0.40.
+
+   ```r
+   library(lme4)
+   null_eng <- lmer(engagement ~ 1 + (1 | dyad_id), data = ddl2)
+   # ... and so on for performance and creativity
+   ```
+
+4. **Summarise the three moderators.**
+   - `live_together` — frequency table converted to proportions. Expect ~85% to be 1.
+   - `years_together` — expect mean ≈ 10, range 1–35.
+   - `time_spent_this_morning_together` — expect mean ≈ 45 minutes, range 0–150.
+
+5. **Within-dyad correlations for the predictors.** Compute the within-dyad correlation for each of `affect`, `sdt`, `job_crafting`. The cleanest approach is to merge the long data on `dyad_id` so you have separate male and female columns, then use `cor()`. Expect each correlation to be near 0.30.
+
+6. **Paired t-tests for gender mean differences.** For each outcome and each predictor, run a paired *t*-test of the variable against gender. Identify which variables show statistically significant gender mean differences. Expect clear differences on `sdt` and `creativity`.
+
+## Reflection prompt
+
+Which of the three outcomes shows the largest gender difference in mean, and which shows the smallest? Does the difference match the DGP intercept gap, or is it diluted by the gender-asymmetric predictors?
+
+::: {.callout-tip collapse="true"}
+## Hints & solution outline
+
+**Tutorial reference:** [Indistinguishable MLM, Step 1](../../tutorials/indistinguishable/mlm.qmd#step-1-estimate-the-icc) for the ICC computation pattern. The same `icc()` helper function can be reused verbatim.
+
+**DGP intercept gaps** (from `simulate_exercise_data.R`):
+- engagement: $\alpha_m - \alpha_f = +0.15$ (males higher)
+- performance: $\alpha_m - \alpha_f = +0.10$ (males higher)
+- creativity: $\alpha_m - \alpha_f = -0.15$ (females higher)
+
+So the largest *positive* gender gap is on **engagement**, the largest *negative* is on **creativity**, and **performance** sits between. Your point estimates should be close to these, possibly diluted by the gender-asymmetric predictor means.
+
+**ICC heuristic.** The within-dyad outcome correlation is set to 0.25 in the DGP. With six within-dyad predictors, the residual variance is somewhat smaller than the total variance, so the ICC (which uses total variance) tends to come out around 0.30–0.45.
+
+**What to record.** For each outcome, write: *ICC ≈ X.XX, so roughly XX% of the variance in [outcome] is shared within dyads — clear non-independence.*
+:::

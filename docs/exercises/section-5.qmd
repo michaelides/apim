@@ -1,0 +1,43 @@
+---
+title: "Section 5 — Distinguishable dyads: SEM (moderation)"
+---
+
+# Section 5 — Distinguishable dyads: SEM (moderation)
+
+**What you are practising:** mirroring the multilevel moderator approach in SEM with calculated simple slopes.
+
+**Reference:** [Distinguishable dyads: SEM with moderation tutorial](../../tutorials/distinguishable/sem-moderation.qmd).
+
+::: {.callout-note}
+## Goal
+For each outcome, fit a two-level SEM with gender interactions at the within-dyad level and the three moderators at the between-dyad level, and compare the within-dyad gender coefficients with the multilevel estimates from Section 4.
+:::
+
+## Tasks
+
+1. **Construct the gender indicator and interaction columns.** Create a numeric gender indicator in `ddl2` (1 for males, 2 for females). Then create manual interaction columns by multiplying each of the six predictors by the gender indicator.
+
+2. **Specify a two-level SEM.** For each outcome, place the gender interactions and the gender main effect at the within level, and the three moderators at the between level. Use named labels on the path coefficients.
+
+3. **Add calculated simple slopes.** Use the `:=` operator in `lavaan` to define simple slopes for each predictor at the male (1) and female (2) values of the gender indicator.
+
+4. **Fit and inspect.** Use `parameterEstimates()` to look at the calculated simple-slope parameters in particular.
+
+## Reflection prompt
+
+Do the within-dyad SEM gender coefficients agree with the multilevel estimates from Section 4? If they differ in magnitude, is the difference large enough to be substantively meaningful?
+
+::: {.callout-tip collapse="true"}
+## Hints & solution outline
+
+**Tutorial reference:** [SEM with moderation](../../tutorials/distinguishable/sem-moderation.qmd). The interaction-column construction is in the Setup block; the model is in step 2; the simple-slope definitions are in step 3.
+
+**Substitutions:**
+- `ddl` → `ddl2`
+- Replace the two interaction columns (`wnc_x_gender`, `partner_wnc_x_gender`) with the six columns for the new predictors
+- Add the moderator names to the between-level block
+
+**What to expect.** The within-dyad SEM gender coefficients should be close to the MLM gender × predictor interactions from Section 4, with small differences due to standard-error formula differences (Wald vs. profile-likelihood) and the within/between decomposition. The differences should be small relative to the standard errors.
+
+**What to record.** For each outcome: *"The SEM `aw_int` for [focal actor predictor] on [outcome] is X.XX; the MLM equivalent `affect:genderfemale` is X.XX. Difference ≈ 0.0X."*
+:::

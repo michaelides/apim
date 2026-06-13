@@ -1,0 +1,116 @@
+---
+title: "Data structures"
+---
+
+# Data structures
+
+Long format, wide format, and the doubling rule.
+
+## Two representations of the same dyad
+
+You can always store a dyadic dataset two ways.
+
+**Wide format** has one row per dyad, with separate columns for
+each member.
+
+```
+dyad_id  wnc_a  wnc_p  satisfaction_a  satisfaction_p  has_children
+1        2.1    1.8    4.2              4.6             1
+2        0.7    0.5    5.1              5.0             0
+```
+
+The suffixes `_a` and `_p` are arbitrary labels — "actor" and
+"partner" — and they refer to the *roles* assigned to the two
+columns, not to specific people. For an indistinguishable dyad,
+the assignment is arbitrary: switching the labels gives you the
+same dataset, just with a different person labelled as actor.
+
+For a distinguishable dyad, the labels are not arbitrary. You
+adopt a convention: `_a` is the husband, `_p` is the wife; or `_a`
+is the parent, `_p` is the child. Once the convention is chosen,
+it is fixed.
+
+**Long format** has one row per *person*, with a person-id
+column and a dyad-id column.
+
+```
+dyad_id  person_id  gender   wnc   partner_wnc   satisfaction  has_children
+1        1          male     2.1   1.8           4.2           1
+1        2          female   1.8   2.1           4.6           1
+2        1          male     0.7   0.5           5.1           0
+2        2          female   0.5   0.7           5.0           0
+```
+
+Long format is the natural format for multilevel models, because
+multilevel models treat persons as nested in dyads. Wide format is
+the natural format for structural equation models with `lavaan`,
+because `lavaan` syntax writes one regression per row of data.
+
+## The doubling rule
+
+A wide-format dataset of $N$ dyads has $N$ rows. A long-format
+dataset of the same $N$ dyads has $2N$ rows — one for each
+member. The two are the same dataset; the only difference is the
+storage layout. You can always convert between them with a
+double-and-stack (long → wide) or a pivot-and-average (wide →
+long) operation.
+
+::: {.callout-tip}
+## Converting with `dplyr`
+The `simulate_exercise_data.R` script in the [exercises](../exercises/index.qmd)
+shows the standard pattern for going from long to wide with
+`tidyr::pivot_wider()` and from wide to long with
+`tidyr::pivot_longer()`.
+:::
+
+## When to use which
+
+| Use | Format | Why |
+|---|---|---|
+| Multilevel models (`lme4::lmer`) | long | Multilevel models are written in long format. |
+| SEM in `lavaan` | wide | One row per dyad; each column is a variable in the model. |
+| SEM in `lavaan` with moderation | long | Manual interaction columns are easier in long format. |
+| Cluster-robust standard errors in `lavaan` | long | `lavaan` accepts a `cluster` argument and treats long-format data correctly. |
+| Aggregation (e.g. computing ICC) | both | Easier in long format. |
+
+The [indistinguishable MLM tutorial](../tutorials/indistinguishable/mlm.qmd)
+uses the long format. The [SEM wide
+tutorial](../tutorials/indistinguishable/sem.qmd) for indistinguishable
+dyads uses the wide format. The [distinguishable SEM wide
+tutorial](../tutorials/distinguishable/sem-wide.qmd) also uses wide
+format. The [SEM with moderation
+tutorial](../tutorials/distinguishable/sem-moderation.qmd) switches
+to long format to make the gender interaction easier to write.
+
+## A third option: the two-intercept model
+
+For distinguishable dyads, the [two-intercept
+tutorial](../tutorials/distinguishable/two-intercept.qmd) shows a
+third approach: fit a single multilevel model with two intercepts
+(one per role) and constrained equal slopes. This is a special
+case of the long-format MLM that is useful when you want to report
+the *absolute* mean of each role, not the contrast with a reference
+group.
+
+## How the simulated datasets on this site are laid out
+
+The `dyad_data.RData` file contains:
+
+- `ddl` — long format, 200 rows, 10 columns.
+- `ddw` — wide format, 100 rows, 10 columns.
+
+The `exercise_data.RData` file contains:
+
+- `ddl2` — long format, 500 rows, 15 columns.
+- `ddw2` — wide format, 250 rows, 16 columns.
+
+Both datasets are documented in the [Data section](../data/index.qmd).
+
+## References
+
+- Kenny, D. A., Kashy, D. A., & Cook, W. L. (2006). *Dyadic data
+  analysis.* Guilford Press. (Chapter 3 on data layouts.)
+- Ackerman, R. A., Donnellan, M. B., & Kashy, D. A. (2011). Working
+  with dyadic data: An introduction. In L. M. Horowitz & S. N.
+  Strack (Eds.), *Handbook of interpersonal psychology*
+  (pp. 547–558). Wiley.

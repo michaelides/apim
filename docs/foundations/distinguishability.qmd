@@ -1,0 +1,98 @@
+---
+title: "Distinguishability"
+---
+
+# Distinguishability
+
+The first design decision in any APIM: can the two members of each
+dyad be told apart?
+
+## The decision
+
+For every dyadic dataset you can name, ask one question: *Is there a
+variable that distinguishes the two members of each dyad, in a way
+that the two roles are not arbitrary?*
+
+| If the answer is **yes** | If the answer is **no** |
+|---|---|
+| Heterosexual couples (gender) | Same-sex couples (no gender) |
+| Parent–child (role) | Siblings (no role) |
+| Doctor–patient (role) | Strangers paired in a lab (no role) |
+| Older–younger twin (age) | Identical twins of the same age |
+| Therapist–client in session 1 (role) | Friends in a friendship pair (no role) |
+
+::: {.callout-tip}
+## A useful asymmetry test
+For a continuous distinguishing variable (e.g. age, education), a
+paired *t*-test on the variable itself, between the two roles, is a
+quick way to see whether the roles are systematically different. If
+the test is significant, the dyads are distinguishable; if not, you
+have indistinguishable dyads.
+:::
+
+The dyad members may have *different means* (males score higher on
+income than females, parents score higher on work experience than
+children) even when the *slopes* are equal. Indistinguishability of
+slopes is the working definition of an indistinguishable dyad.
+
+## Why it matters
+
+The model you fit changes.
+
+- **Indistinguishable dyads.** The actor and partner slopes for the
+  *same* predictor are constrained to be equal. The reason is that
+  there is no role to anchor them to: if dyad members are
+  interchangeable, the slope from A's predictor to B's outcome and
+  the slope from B's predictor to A's outcome are two estimates of
+  the same number, and pooling them gives you more power.
+- **Distinguishable dyads.** The actor and partner slopes are free
+  to differ. You can then ask whether the gender difference in
+  slopes is itself significant — this is the
+  Kenny & Ledermann (2010) k-pattern test.
+
+## An empirical question, not a data property
+
+Here is the most important point in the foundations section.
+Distinguishability is **not** a property of the data you happened
+to collect. It is a property of the *dyad type* you are studying.
+You can study same-sex couples with a dataset whose members all
+happen to be female, and the dyads are still indistinguishable
+(because the two members cannot be told apart by gender). You can
+study heterosexual couples with a dataset whose males and females
+have identical means, and the dyads are still distinguishable
+(because the two roles exist).
+
+The choice between the [indistinguishable
+tutorials](../tutorials/indistinguishable/index.qmd) and the
+[distinguishable tutorials](../tutorials/distinguishable/index.qmd)
+is made before you open the data.
+
+## What if you are not sure?
+
+Two practical tests:
+
+1. **Equality-constrained SEM.** Fit the wide-format model with
+   actor and partner slopes constrained to be equal. Fit the
+   unconstrained model. Run a likelihood ratio test. A non-significant
+   *p*-value supports indistinguishability. (This is the
+   indistinguishability test in the
+   [SEM wide tutorial](../tutorials/distinguishable/sem-wide.qmd).)
+2. **MLM with gender interaction.** Fit a multilevel model with
+   `gender` interacting every actor and partner predictor. A
+   likelihood ratio test against the gender-free model tells you
+   whether the slopes differ by gender. (This is the
+   [MLM moderator tutorial](../tutorials/distinguishable/mlm-moderator.qmd).)
+
+The two approaches usually agree, but if they disagree, trust the
+test that has more power for your specific design. The
+[wide-format SEM test](../tutorials/distinguishable/sem-wide.qmd)
+is the gold standard.
+
+## References
+
+- Kenny, D. A., & Ledermann, T. (2010). Detecting, measuring, and
+  testing dyadic patterns in the Actor–Partner Interdependence
+  Model. *Journal of Family Psychology, 24*(3), 359–366.
+- Olsen, J. A., & Kenny, D. A. (2006). Structural equation modeling
+  with interchangeable dyads. *Psychological Methods, 11*(2),
+  127–141.

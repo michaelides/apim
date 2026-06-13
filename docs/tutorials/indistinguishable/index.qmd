@@ -1,0 +1,68 @@
+---
+title: "Indistinguishable dyads"
+subtitle: "MLM and SEM for dyads whose members are interchangeable"
+---
+
+When the two members of each dyad are not marked by a distinguishing
+variable — siblings, strangers paired in an experiment, friends — the
+APIM treats the actor and partner slopes as equal. The two tutorials
+in this section show how to fit and interpret the model in long
+format with `lme4` and in wide format with `lavaan`.
+
+::: {.callout-note}
+## When to use these tutorials
+You have dyadic data with no distinguishing variable, **or** you are
+fitting a baseline model whose constraints you will later relax
+(distinguishable dyads). The distinguishable tutorials in the next
+section build on these.
+:::
+
+::: {.card-grid}
+
+::: {.card}
+### [Tutorial 02 — Indistinguishable dyads: MLM]{.card-title-link}
+
+Long format, `lme4::lmer`. Random intercept per dyad. ICC. Full
+APIM with all actor and partner effects. Likelihood ratio test for
+the partner block. Profile-likelihood confidence intervals.
+
+<span class="tag tag-mlm">MLM</span>
+<span class="tag tag-beginner">Beginner</span>
+
+[Open tutorial →](mlm.qmd)
+:::
+
+::: {.card}
+### [Tutorial 03 — Indistinguishable dyads: SEM wide]{.card-title-link}
+
+Wide format, `lavaan::sem`. Equality-constrained actor and partner
+slopes. Fit indices. The Olsen & Kenny (2006) specification. Likelihood
+ratio test against the unconstrained model.
+
+<span class="tag tag-sem">SEM</span>
+<span class="tag tag-intermediate">Intermediate</span>
+
+[Open tutorial →](sem.qmd)
+:::
+
+:::
+
+## How the two tutorials relate
+
+Both tutorials fit the same APIM, but they go about it differently.
+
+- The **MLM** tutorial uses long-format data. The random intercept
+  for `dyad_id` accounts for the non-independence. The slope labels
+  are the same for actor and partner predictors — by construction,
+  in the long format, the same variable name is used for both
+  partners' scores.
+- The **SEM** tutorial uses wide-format data. The equality of actor
+  and partner slopes is imposed *explicitly* in the `lavaan` model
+  syntax, by labelling the two paths with the same label.
+
+In the simulated `dyad_data` dataset, the actor and partner slopes
+are equal in the data-generating process. The two approaches should
+give you identical point estimates, but the SEM is more flexible
+(it can test the equality of slopes via an LRT against the
+unconstrained model — see the [distinguishable SEM wide
+tutorial](../distinguishable/sem-wide.qmd) for that).

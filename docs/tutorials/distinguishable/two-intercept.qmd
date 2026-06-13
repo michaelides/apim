@@ -1,0 +1,175 @@
+---
+title: "Two-intercept models"
+subtitle: "Estimating both intercepts directly with the 0 + gender trick"
+---
+
+When dyads are distinguishable by *means* but not by *effects* —
+the common empirical pattern — you usually want to report the
+absolute mean of each group, not the contrast with a reference.
+The two-intercept model is a parameterisation trick that estimates
+both intercepts directly.
+
+The trick: in R's formula syntax, `0 + gender` suppresses the
+global intercept and replaces it with one intercept per level of
+`gender`. You get two intercepts, no reference group, and a clean
+likelihood ratio test for the "equal intercepts" null.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(lme4)
+library(lmerTest)
+library(lavaan)
+library(dplyr)
+
+load("../../../data/dyad_data.RData")
+```
+
+## The three nested models
+
+The two-intercept approach compares three nested models. The
+ordering is: most constrained → recommended baseline → full model.
+
+### Model 1: equal intercepts, equal slopes
+
+The most constrained model. Single intercept, slopes pooled.
+
+```{r}
+#| label: model1
+
+model1_mlm <- lmer(
+  satisfaction ~ wnc + partner_wnc + recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(model1_mlm)
+```
+
+### Model 2: different intercepts, equal slopes (recommended)
+
+The recommended baseline. Two intercepts, slopes pooled. Note the
+`0 + gender` syntax — this replaces the global intercept with one
+intercept per level of `gender`.
+
+```{r}
+#| label: model2
+
+model2_mlm <- lmer(
+  satisfaction ~ 0 + gender + wnc + partner_wnc +
+    recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(model2_mlm)
+```
+
+::: {.callout-tip}
+## Reading the two intercepts
+
+The fixed-effect coefficients now include `gendermale` and
+`genderfemale`. These are the absolute means of each group
+(adjusted for the other predictors in the model). Compare to the
+DGP values: $\alpha_m = 5.00$ and $\alpha_f = 4.85$.
+:::
+
+### Model 3: different intercepts, different slopes (full model)
+
+The full model. Two intercepts, separate slopes for each gender.
+
+```{r}
+#| label: model3
+
+model3_mlm <- lmer(
+  satisfaction ~ 0 + gender + gender:wnc + gender:partner_wnc +
+    gender:recovery + gender:partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(model3_mlm)
+```
+
+## The two likelihood ratio tests
+
+```{r}
+#| label: lrts
+
+cat("Test A: Model 1 vs Model 2 (Equal vs Different Intercepts)\n")
+print(anova(model1_mlm, model2_mlm))
+
+cat("\nTest B: Model 2 vs Model 3 (Equal vs Different Slopes)\n")
+print(anova(model2_mlm, model3_mlm))
+```
+
+::: {.callout-tip}
+## Reading the two tests
+
+- **Test A** tests whether the male and female intercepts differ.
+  In our data, the *p*-value should be small — the DGP has a
+  0.15-point gap in the intercepts.
+- **Test B** tests whether the slopes differ by gender. In our
+  data, the *p*-value should be large — the DGP has equal slopes
+  across gender.
+
+This is the same information you would get from the [SEM wide
+three-LRT sequence](sem-wide.qmd#the-three-nested-lrts), packaged
+as a multilevel model.
+:::
+
+## The SEM analogue (wide format)
+
+In `lavaan`, the wide-format model with separate intercepts *is*
+the two-intercept model. The "trick" is unnecessary because you
+specify the two intercepts explicitly with separate labels.
+
+```{r}
+#| label: sem-analogue
+
+model_sem_2int <- '
+  satisfaction_a ~ a*wnc_a + p*wnc_p + ar*recovery_a +
+                   pr*recovery_p + c*has_children + d*dual_earner
+  satisfaction_p ~ a*wnc_p + p*wnc_a + ar*recovery_p +
+                   pr*recovery_a + c*has_children + d*dual_earner
+  satisfaction_a ~ int_m*1
+  satisfaction_p ~ int_f*1
+  satisfaction_a ~~ var_h*satisfaction_a
+  satisfaction_p ~~ var_w*satisfaction_p
+  wnc_a ~~ wnc_p
+  recovery_a ~~ recovery_p
+  satisfaction_a ~~ res_cov*satisfaction_p
+'
+
+fit_sem_2int <- sem(model_sem_2int, data = ddw)
+summary(fit_sem_2int, standardized = TRUE, fit.measures = TRUE)
+```
+
+The `int_m` and `int_f` parameters in the SEM correspond to the
+`gendermale` and `genderfemale` intercepts in the MLM Model 2.
+
+## When to use this specification
+
+::: {.callout-takeaway}
+## Key takeaways
+
+- The two-intercept MLM with `0 + gender` is the cleanest
+  specification when you want to report the absolute mean of
+  each group.
+- The three nested LRTs (Models 1 → 2 → 3) test intercept
+  equality and slope equality in a single pipeline.
+- The wide-format SEM is mathematically equivalent — the
+  "trick" is specific to multilevel models in long format.
+- In our data, Model 2 is the recommended baseline: intercepts
+  differ, slopes do not.
+:::
+
+## What to read next
+
+- The [Hahn et al. (2014) replication
+  tutorial](../moderated/hahn2014.qmd) — the moderated APIM, the
+  full APIM workflow.

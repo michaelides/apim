@@ -1,0 +1,152 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Dyadic Data Analysis in R"
+  description: "A practical guide to the Actor–Partner Interdependence Model with multilevel models and structural equation models in R."
+  site-url: "https://example.com/dyadic-data-analysis-in-r"
+  repo-url: "https://github.com/example/dyadic-data-analysis-in-r"
+  repo-actions: [edit, issue]
+  page-navigation: true
+  search: true
+  favicon: "favicon.svg"
+  navbar:
+    background: light
+    foreground: dark
+    logo: "logo.svg"
+    logo-alt: "Dyadic Data Analysis in R"
+    title: "Dyadic Data Analysis in R"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Foundations"
+        href: foundations/index.qmd
+      - text: "Tutorials"
+        menu:
+          - text: "Indistinguishable dyads"
+            href: tutorials/indistinguishable/index.qmd
+          - text: "Distinguishable dyads"
+            href: tutorials/distinguishable/index.qmd
+          - text: "Moderated APIM"
+            href: tutorials/moderated/index.qmd
+      - text: "Exercises"
+        href: exercises/index.qmd
+      - text: "Data"
+        href: data/index.qmd
+      - text: "References"
+        href: references/index.qmd
+      - text: "About"
+        href: about/index.qmd
+    right:
+      - icon: github
+        href: "https://github.com/example/dyadic-data-analysis-in-r"
+        aria-label: "GitHub repository"
+
+  sidebar:
+    - id: foundations
+      title: "Foundations"
+      style: "floating"
+      collapse-level: 2
+      contents:
+        - foundations/index.qmd
+        - section: "Conceptual background"
+          contents:
+            - foundations/non-independence.qmd
+            - foundations/distinguishability.qmd
+            - foundations/kpatterns.qmd
+            - foundations/data-structures.qmd
+    - id: tutorials-indistinguishable
+      title: "Indistinguishable dyads"
+      style: "floating"
+      contents:
+        - tutorials/indistinguishable/index.qmd
+        - tutorials/indistinguishable/mlm.qmd
+        - tutorials/indistinguishable/sem.qmd
+    - id: tutorials-distinguishable
+      title: "Distinguishable dyads"
+      style: "floating"
+      contents:
+        - tutorials/distinguishable/index.qmd
+        - tutorials/distinguishable/mlm-moderator.qmd
+        - tutorials/distinguishable/sem-moderation.qmd
+        - tutorials/distinguishable/sem-wide.qmd
+        - tutorials/distinguishable/two-intercept.qmd
+    - id: tutorials-moderated
+      title: "Moderated APIM"
+      style: "floating"
+      contents:
+        - tutorials/moderated/index.qmd
+        - tutorials/moderated/hahn2014.qmd
+    - id: exercises
+      title: "Exercises"
+      style: "floating"
+      contents:
+        - exercises/index.qmd
+        - exercises/section-1.qmd
+        - exercises/section-2.qmd
+        - exercises/section-3.qmd
+        - exercises/section-4.qmd
+        - exercises/section-5.qmd
+        - exercises/section-6.qmd
+        - exercises/section-7.qmd
+        - exercises/section-8.qmd
+        - exercises/section-9.qmd
+    - id: data
+      title: "Data"
+      style: "floating"
+      contents:
+        - data/index.qmd
+        - data/dyad-data.qmd
+        - data/exercise-data.qmd
+    - id: references
+      title: "References"
+      style: "floating"
+      contents:
+        - references/index.qmd
+    - id: about
+      title: "About"
+      style: "floating"
+      contents:
+        - about/index.qmd
+        - about/install.qmd
+        - about/how-to-cite.qmd
+
+  page-footer:
+    left: "© 2026 George Michaelides. Materials released under CC BY 4.0."
+    right:
+      - icon: github
+        href: "https://github.com/example/dyadic-data-analysis-in-r"
+        aria-label: "GitHub repository"
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles/site.scss
+    css: styles/site.css
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    number-sections: false
+    number-depth: 3
+    code-fold: show
+    code-tools: true
+    code-link: true
+    link-external-newwindow: true
+    fig-width: 7
+    fig-height: 4.5
+    fig-align: "center"
+    df-print: paged
+    callout-appearance: simple
+    callout-icon: true
+    cap-location: bottom
+
+execute:
+  freeze: auto
+  cache: true
+  echo: true
+  warning: false
+  message: false
+
+editor: source

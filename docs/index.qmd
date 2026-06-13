@@ -1,0 +1,165 @@
+---
+title: "Dyadic Data Analysis in R"
+subtitle: "A practical guide to the Actor–Partner Interdependence Model with multilevel models and structural equation models"
+format:
+  html:
+    toc: false
+    page-navigation: false
+---
+
+::: {.hero}
+# Dyadic Data Analysis in R
+
+A complete, hands-on guide to estimating, interpreting, and reporting
+Actor–Partner Interdependence Models (APIM) using R.
+
+**Learn how to model two-person data correctly — when the people in
+your study are not independent.**
+:::
+
+## What is the APIM?
+
+The Actor–Partner Interdependence Model is the standard framework for
+analysing data in which two people's responses are inherently linked —
+romantic partners, parent–child dyads, coworkers, doctor–patient
+encounters, even dyadic experiments.
+
+It separates two kinds of effects:
+
+- **Actor effects** — the effect of *my* characteristic on *my* outcome.
+- **Partner effects** — the effect of *my* characteristic on *my
+  partner's* outcome.
+
+Distinguishing the two requires accounting for the non-independence
+within each dyad. That is the central methodological move of the APIM,
+and it is what the rest of this site teaches you to do in R.
+
+## Who is this for?
+
+This site is for **applied researchers and graduate students** who want
+to analyse dyadic data with R. You should be comfortable with linear
+regression and the basics of R. Familiarity with `lme4` or `lavaan` is
+helpful but not assumed.
+
+No prior experience with multilevel models or structural equation
+modelling is required — every concept is introduced as it is used.
+
+## How the site is organised
+
+::: {.card-grid}
+
+::: {.card}
+### [Foundations]{.card-title-link}
+
+Non-independence, the intraclass correlation, distinguishability, the
+four k-patterns, and the data structures APIM can handle.
+
+[Start here →](foundations/index.qmd)
+:::
+
+::: {.card}
+### [Tutorials — Indistinguishable dyads]{.card-title-link}
+
+Multilevel and SEM approaches when the two members of each dyad are
+interchangeable. Pooled slopes, no gender effect.
+
+[Tutorials →](tutorials/indistinguishable/index.qmd)
+:::
+
+::: {.card}
+### [Tutorials — Distinguishable dyads]{.card-title-link}
+
+Add gender (or any distinguishing variable) as a moderator. Compare
+MLM and SEM specifications. Test equality constraints.
+
+[Tutorials →](tutorials/distinguishable/index.qmd)
+:::
+
+::: {.card}
+### [Tutorials — Moderated APIM]{.card-title-link}
+
+The full model: a dyad-level moderator (e.g. presence of children)
+shaping the partner crossover effect. Replication of Hahn, Binnewies,
+& Dormann (2014).
+
+[Tutorial →](tutorials/moderated/index.qmd)
+:::
+
+::: {.card}
+### [Exercises]{.card-title-link}
+
+A nine-section problem set on a separate simulated dataset. Each
+section asks you to fit a model, interpret it, and reflect on the
+result. Hints and worked solutions are provided.
+
+[Practise →](exercises/index.qmd)
+:::
+
+::: {.card}
+### [Data & references]{.card-title-link}
+
+Variable lists, data-generating parameters, and the canonical reading
+list for APIM work in the social and organisational sciences.
+
+[Browse →](data/index.qmd){.card-link} · [References →](references/index.qmd)
+:::
+
+:::
+
+## A two-minute example
+
+The model you will learn to fit looks like this in long format
+(one row per person):
+
+```{=tex}
+\begin{align}
+\text{satisfaction}_{ij} = &\;\beta_0 + \beta_1 \text{wnc}_{ij} + \beta_2 \text{partner\_wnc}_{ij} \\
+                           &+ \beta_3 \text{recovery}_{ij} + \beta_4 \text{partner\_recovery}_{ij} \\
+                           &+ \beta_5 \text{has\_children}_j + \beta_6 \text{dual\_earner}_j \\
+                           &+ u_{0j} + \varepsilon_{ij}
+\end{align}
+```
+
+where person $i$ is nested in dyad $j$, $u_{0j}$ is the dyad-level
+random intercept, and $\varepsilon_{ij}$ is the residual.
+
+- $\beta_1$ is the **actor effect** of work–nonwork conflict.
+- $\beta_2$ is the **partner effect** of conflict crossover.
+
+The tutorials work through how to estimate, interpret, and report
+this model, and how to extend it to distinguishable dyads and
+moderation.
+
+## Run it yourself
+
+Every tutorial is a Quarto document. The R code is executed when the
+site is rendered, so output (model summaries, fit indices, plots) is
+always current with the data.
+
+To run locally, install the R packages and preview the site:
+
+```r
+# From the repository root
+make deps        # install lme4, lmerTest, lavaan, dplyr, interactions, semPlot, knitr, rmarkdown
+make preview     # live-reload local preview at http://localhost:4200
+make site        # build static site into docs/_site/
+```
+
+Or with Quarto directly:
+
+```bash
+quarto preview docs
+quarto render docs
+```
+
+## Acknowledgements
+
+These materials were originally developed for the EAOHP 2026 conference
+workshop *Dyadic Data Analysis Using R*. The simulation data
+structures emulate the work of Hahn, Binnewies, & Dormann (2014). The
+APIM framework rests on the work of Kenny, Kashy, Cook, and
+Ledermann, among many others; see the [references](references/index.qmd)
+for the full list.
+
+Materials are by [George Michaelides](about/index.qmd), released under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

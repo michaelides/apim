@@ -1,0 +1,171 @@
+---
+title: "Distinguishable dyads: MLM moderator"
+subtitle: "Long format, lme4, gender × predictor interactions"
+---
+
+The simplest way to add gender to the APIM is to fit a multilevel
+model in long format with `gender` as a factor that interacts with
+every actor and partner predictor. This is the "version B" approach
+in the original workshop materials — it decomposes actor and
+partner pathways properly.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(lme4)
+library(lmerTest)
+library(dplyr)
+library(interactions)
+
+load("../../../data/dyad_data.RData")
+
+cat("Dyads:    ", length(unique(ddl$dyad_id)), "\n")
+cat("Persons:  ", nrow(ddl), "\n\n")
+cat("Gender distribution:\n")
+print(table(ddl$gender))
+```
+
+## Step 1: the baseline model (no gender)
+
+The baseline is the same as the [indistinguishable
+tutorial](../indistinguishable/mlm.qmd) APIM. It estimates pooled
+slopes across gender.
+
+```{r}
+#| label: baseline
+
+model_base <- lmer(
+  satisfaction ~ wnc + partner_wnc + recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(model_base)
+```
+
+## Step 2: add gender × predictor interactions
+
+The full moderator model interacts `gender` with every actor and
+partner predictor. The two dyad-level covariates (`has_children`,
+`dual_earner`) stay as main effects — they have no within-dyad
+variance to moderate.
+
+```{r}
+#| label: moderator
+
+model_moderator <- lmer(
+  satisfaction ~ wnc * gender + partner_wnc * gender +
+    recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(model_moderator)
+```
+
+::: {.callout-warning}
+## Why "version B"?
+The simpler formulation `wnc + partner_wnc + gender` (without the
+`*` interactions) would conflate the actor and partner pathways
+and is **not** recommended. Always use the decomposed form above:
+`(wnc + partner_wnc) * gender`. This gives you separate gender
+effects for the actor and partner pathways.
+:::
+
+## Step 3: likelihood ratio test
+
+The likelihood ratio test of the baseline vs the moderator model
+tests the joint null that all four gender × predictor interactions
+are zero.
+
+```{r}
+#| label: lrt
+
+lrt <- anova(model_base, model_moderator)
+print(lrt)
+```
+
+In our data, the *p*-value should be large — the data-generating
+process has equal slopes across gender. The LRT confirms what we
+already know from the DGP.
+
+## Step 4: simple slopes
+
+If the LRT *had* been significant, the next step would be to extract
+simple slopes for the actor and partner effects separately for each
+gender. The `interactions` package has a clean interface for this.
+
+```{r}
+#| label: simple-slopes
+
+sim_awnc <- sim_slopes(model_moderator, pred = wnc,
+                       modx = gender, johnson_neyman = FALSE)
+print(sim_awnc)
+```
+
+The `sim_slopes` function returns the slope of `wnc` on satisfaction
+at each level of `gender` (male, female), with standard errors and
+confidence intervals. In our data, the two slopes are nearly equal —
+the gender × wnc interaction is small and not statistically
+significant.
+
+## Step 5: profile-likelihood confidence intervals
+
+```{r}
+#| label: profile-ci
+
+ci <- confint(model_moderator, method = "profile")
+print(round(ci, 4))
+```
+
+## Interpreting the intercept
+
+`Male` is the reference group in R's default contrast coding. The
+fixed-effect intercept is the male intercept. The `genderfemale`
+coefficient is the *female minus male* difference in intercepts. In
+our data, this difference should be close to the DGP value of
+$-0.15$ ($\alpha_f - \alpha_m = 4.85 - 5.00$).
+
+::: {.callout-tip}
+## Reading the gender × predictor interaction
+
+- `wnc:genderfemale` is the difference in the actor effect of WNC
+  between females and males. Zero in our DGP.
+- `partner_wnc:genderfemale` is the difference in the partner
+  effect of WNC between females and males. Zero in our DGP.
+
+If you fit this model on real data with non-zero gender moderation,
+the corresponding interaction will be significantly different from
+zero, and `sim_slopes` will return different slopes for males and
+females.
+:::
+
+## What to take away
+
+::: {.callout-takeaway}
+## Key takeaways
+
+- The MLM moderator approach fits a single long-format model with
+  gender × predictor interactions. It is the most common
+  specification in applied APIM work.
+- Always use the decomposed form `(wnc + partner_wnc) * gender` —
+  the simpler form conflates actor and partner pathways.
+- The LRT of the moderator vs the baseline tests whether gender
+  moderates any of the actor or partner effects *jointly*.
+- Simple slopes are the recommended way to report the conditional
+  actor and partner effects at each level of gender.
+:::
+
+## What to read next
+
+- The [SEM with moderation tutorial](sem-moderation.qmd) shows
+  the same specification in `lavaan` with calculated simple
+  slopes.
+- The [SEM wide tutorial](sem-wide.qmd) gives you the Olsen &
+  Kenny (2006) three-model sequence and the k-pattern tests.
+- The [two-intercept tutorial](two-intercept.qmd) shows a
+  parameterisation trick that estimates both intercepts directly.

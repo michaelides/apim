@@ -1,0 +1,148 @@
+---
+title: "Exercises"
+subtitle: "A nine-section problem set on a second dyadic dataset"
+---
+
+These exercises ask you to apply every method in the [tutorials](../../tutorials/indistinguishable/index.qmd) to a *new* dyadic dataset. The dataset has three outcomes, three predictors, and three dyad-level moderators, so each analytic step has to be repeated three times — once per outcome. That repetition is the point: in real research, you fit the same model several times and interpret each fit in light of the data-generating process.
+
+::: {.callout-important}
+## Before you start
+- The exercise dataset is [`data/exercise_data.RData`](../../data/exercise-data.qmd). It is *different* from the tutorial dataset. Read its [documentation](../../data/exercise-data.qmd) first.
+- Each section has a collapsible **Hints & solution outline** block at the bottom. Open it only after you have produced the model and your one-sentence interpretation.
+- The reflection prompts are the most important part. The numerical answers are reproducible from the DGP; your *interpretation* is what the exercise is testing.
+:::
+
+## The nine sections
+
+::: {.card-grid}
+
+::: {.card}
+### [Section 1 — Data simulation & inspection]{.card-title-link}
+
+Orient yourself to the exercise dataset before any modelling.
+Compute the ICC for each outcome, summarise the moderators, and
+identify which variables show gender mean differences.
+
+<span class="tag tag-beginner">Beginner</span>
+
+[Open section →](section-1.qmd)
+:::
+
+::: {.card}
+### [Section 2 — Indistinguishable dyads: MLM]{.card-title-link}
+
+Fit the full Actor–Partner Interdependence Model in long format
+for each of the three outcomes, compare with a partner-free
+baseline, and write a two-sentence interpretation.
+
+<span class="tag tag-mlm">MLM</span>
+<span class="tag tag-intermediate">Intermediate</span>
+
+[Open section →](section-2.qmd)
+:::
+
+::: {.card}
+### [Section 3 — Indistinguishable dyads: SEM]{.card-title-link}
+
+Three SEM paradigms for indistinguishable dyads: cluster-robust
+SE, two-level within/between decomposition, and the wide-format
+equality-constrained model. The formal indistinguishability test.
+
+<span class="tag tag-sem">SEM</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open section →](section-3.qmd)
+:::
+
+::: {.card}
+### [Section 4 — Distinguishable dyads: MLM moderator]{.card-title-link}
+
+Add gender as a moderator of actor and partner effects. Use
+simple slopes to extract the conditional effects for each gender.
+
+<span class="tag tag-mlm-moderator">MLM + gender</span>
+<span class="tag tag-intermediate">Intermediate</span>
+
+[Open section →](section-4.qmd)
+:::
+
+::: {.card}
+### [Section 5 — Distinguishable dyads: SEM (moderation)]{.card-title-link}
+
+Two-level SEM with gender × predictor interactions at the
+within-dyad level. Calculated simple slopes in `lavaan`.
+
+<span class="tag tag-sem-moderation">SEM + gender</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open section →](section-5.qmd)
+:::
+
+::: {.card}
+### [Section 6 — Distinguishable dyads: SEM wide]{.card-title-link}
+
+The unconstrained / slopes-equal / fully-constrained model
+sequence and the three nested likelihood ratio tests.
+
+<span class="tag tag-sem-wide">SEM wide</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open section →](section-6.qmd)
+:::
+
+::: {.card}
+### [Section 7 — Two-intercept models]{.card-title-link}
+
+The `0 + gender` parameterisation trick. Three nested MLMs and
+their LRTs. The SEM analogue.
+
+<span class="tag tag-mlm-two-intercept">Two-intercept</span>
+<span class="tag tag-intermediate">Intermediate</span>
+
+[Open section →](section-7.qmd)
+:::
+
+::: {.card}
+### [Section 8 — Moderated APIM (the centrepiece)]{.card-title-link}
+
+The focal crossover-by-moderator interaction for each outcome,
+in both MLM and SEM. Simple slopes at low and high levels of
+the moderator.
+
+<span class="tag tag-mlm-moderated">MLM + SEM</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open section →](section-8.qmd)
+:::
+
+::: {.card}
+### [Section 9 — Integrative exercise]{.card-title-link}
+
+A kitchen-sink multilevel model and the matching SEM. One
+outcome. Three moderator levels. A 4–6 sentence interpretation
+paragraph.
+
+<span class="tag tag-advanced">Advanced</span>
+
+[Open section →](section-9.qmd)
+:::
+
+:::
+
+## Dataset cheat sheet
+
+| Element | Value |
+|---|---|
+| N couples | 250 (500 individuals) |
+| Outcomes | `engagement`, `performance`, `creativity` |
+| Predictors | `affect`, `sdt`, `job_crafting` |
+| Moderators | `live_together` (binary), `years_together` (continuous), `time_spent_this_morning_together` (continuous) |
+| Distinguishing variable | `gender` (`male` / `female`) |
+| Long format | `ddl2` |
+| Wide format | `ddw2` |
+
+## Suggested order
+
+Sections 1–8 follow the same order as the [tutorials](../../tutorials/indistinguishable/index.qmd). Section 9 is the integrative capstone — do it last.
+
+If you are short on time, the minimum useful set is **1, 2, 4, 8**: data inspection, indistinguishable MLM, gender moderator, and the moderated APIM. These four cover roughly 80% of what you will need in your own research.

@@ -1,0 +1,165 @@
+---
+title: "Distinguishable dyads: SEM with moderation"
+subtitle: "Two-level SEM with within-dyad gender interactions"
+---
+
+The [MLM moderator tutorial](mlm-moderator.qmd) added gender ×
+predictor interactions to a long-format multilevel model. This
+tutorial does the same thing in `lavaan`, using the two-level SEM
+specification that decomposes variance into within-dyad and
+between-dyad components.
+
+The two specifications should give you nearly identical estimates
+for the within-dyad effects. The SEM version is more transparent
+about which interactions are at the within level and which
+covariates are at the between level.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(lavaan)
+library(dplyr)
+
+load("../../../data/dyad_data.RData")
+
+# Numeric gender indicator for interactions
+# Male = 1, Female = 2 (matches R's default factor coding)
+ddl$gender_num <- as.numeric(ddl$gender)
+
+# Manual interaction columns
+ddl$wnc_x_gender        <- ddl$wnc * ddl$gender_num
+ddl$partner_wnc_x_gender <- ddl$partner_wnc * ddl$gender_num
+
+cat("Long format:", nrow(ddl), "rows\n")
+cat("Gender distribution:\n")
+print(table(ddl$gender))
+```
+
+## Baseline: two-level SEM without gender moderation
+
+Place the four within-dyad predictors at the within level and the
+two dyad-level covariates at the between level. The two-level SEM
+is the SEM analogue of the [MLM tutorial](mlm-moderator.qmd).
+
+```{r}
+#| label: baseline-2level
+
+model_base <- '
+  level: within
+    satisfaction ~ a_w*wnc + p_w*partner_wnc + ar_w*recovery +
+      pr_w*partner_recovery
+
+  level: between
+    satisfaction ~ c_child*has_children + c_dual*dual_earner
+'
+
+fit_base <- sem(model_base, data = ddl, cluster = "dyad_id")
+summary(fit_base, standardized = TRUE, fit.measures = TRUE)
+```
+
+## Add gender × predictor interactions
+
+The within-dyad level now includes the gender main effect and the
+gender × actor/partner WNC interactions. The between-dyad level
+is unchanged.
+
+```{r}
+#| label: moderator-2level
+
+model_moderator <- '
+  level: within
+    satisfaction ~ a_w*wnc + p_w*partner_wnc + ar_w*recovery +
+      pr_w*partner_recovery +
+      g_w*gender_num +
+      aw_int*wnc_x_gender + pw_int*partner_wnc_x_gender
+
+  level: between
+    satisfaction ~ c_child*has_children + c_dual*dual_earner
+
+  # ── Simple slopes ──────────────────────────────
+  # gender_num = 1 (male), gender_num = 2 (female)
+
+  # Actor WNC → satisfaction
+  ss_wnc_M  := a_w + aw_int * 1
+  ss_wnc_F  := a_w + aw_int * 2
+
+  # Partner WNC → satisfaction
+  ss_pwnc_M := p_w + pw_int * 1
+  ss_pwnc_F := p_w + pw_int * 2
+'
+
+fit_moderator <- sem(model_moderator, data = ddl, cluster = "dyad_id")
+summary(fit_moderator, standardized = TRUE, fit.measures = TRUE)
+```
+
+## Reading the calculated simple slopes
+
+The `:=` operator in `lavaan` defines a user-calculated parameter.
+The simple slopes are functions of the base coefficient and the
+interaction coefficient, evaluated at the male and female values
+of `gender_num`.
+
+```{r}
+#| label: simple-slopes
+
+pe <- parameterEstimates(fit_moderator)
+pe[grepl("^ss_", pe$label), c("label", "est", "se", "pvalue")]
+```
+
+::: {.callout-tip}
+## Comparing to the MLM estimates
+
+The within-dyad SEM `aw_int` coefficient (gender × actor WNC) and
+`pw_int` (gender × partner WNC) should match the corresponding
+`wnc:genderfemale` and `partner_wnc:genderfemale` interactions in
+the [MLM moderator tutorial](mlm-moderator.qmd#step-3-likelihood-ratio-test).
+The simple slopes for males and females should also match the
+`sim_slopes()` output.
+:::
+
+## Why "model is saturated" matters here
+
+The two-level SEM with the within-dyad interactions has just-identified
+within-level equations: the four predictors plus three interaction
+terms and a gender main effect consume all the within-dyad degrees of
+freedom. This means:
+
+- The chi-square test of model fit is exactly zero (or near it)
+  by construction.
+- The standard chi-square difference test is *not* available for
+  comparing the baseline and moderator models.
+
+If you want a formal LRT, the right move is to fit both models in
+the wide format (see the [SEM wide tutorial](sem-wide.qmd)), or to
+use the [MLM moderator approach](mlm-moderator.qmd#step-3-likelihood-ratio-test),
+where the LRT is well-defined.
+
+## What to take away
+
+::: {.callout-takeaway}
+## Key takeaways
+
+- The two-level SEM makes the within/between decomposition of
+  effects explicit.
+- Gender × predictor interactions live at the within-dyad level.
+- Dyad-level covariates (no within-dyad variance) live at the
+  between-dyad level.
+- Calculated simple slopes via `:=` give you the conditional
+  effects at each level of the moderator.
+- The model is just-identified within-dyad, so the chi-square LRT
+  is not available; use the MLM version for hypothesis testing.
+:::
+
+## What to read next
+
+- The [SEM wide tutorial](sem-wide.qmd) — wide format, the
+  three-model sequence, the k-pattern tests.
+- The [two-intercept tutorial](two-intercept.qmd) — a
+  parameterisation trick that estimates both intercepts directly.
+- The [Hahn et al. (2014) replication
+  tutorial](../moderated/hahn2014.qmd) — moderated APIM with a
+  dyad-level moderator.

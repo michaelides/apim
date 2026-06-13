@@ -1,0 +1,114 @@
+---
+title: "The k-patterns"
+---
+
+# The k-patterns
+
+Four ways actor and partner effects can combine. How to test which
+one fits your data.
+
+## The basic APIM
+
+Let $X$ be one partner's predictor and $Y$ be the same partner's
+outcome. For a distinguishable dyad, the APIM fits two regressions:
+
+$$
+Y_A = a_A + b_A X_A + b_P X_P \\
+Y_P = a_P + b_P X_A + b_A X_P
+$$
+
+where $b_A$ is the actor effect (the partner of $X$ on their own
+$Y$) and $b_P$ is the partner effect (the partner of $X$ on the
+other person's $Y$). For indistinguishable dyads, the constraint
+$b_A = b_P$ is imposed; the model fits a single common slope $b$.
+
+## Four patterns
+
+Kenny & Ledermann (2010) noted that the relationship between the
+actor slope $b_A$ and the partner slope $b_P$ falls into one of
+four patterns. The ratio $k = b_P / b_A$ is what the test tracks.
+
+| Pattern | Slope configuration | Interpretation | When it arises |
+|---|---|---|---|
+| **Actor only** | $b_P = 0$ | $X$ affects only its own holder | Self-contained traits (income, height) |
+| **Couple** | $b_P = b_A$ | $X$ has the same effect on both partners | Shared resources, joint appraisals |
+| **Contrast** | $b_P = -b_A$ | One partner's $X$ *increases* their own $Y$ but *decreases* the other's $Y$ | Conflict dyads, competitive settings |
+| **Mixed** | $b_P \neq 0, b_A \neq 0$, not equal or opposite | Both effects are present, with different magnitudes | Stress crossover, support transactions |
+
+The fully-constrained SEM in the [SEM wide
+tutorial](../tutorials/distinguishable/sem-wide.qmd) and the
+indistinguishability tests in the [k-patterns sense](#) generalise
+naturally: a non-significant departure from the actor-only pattern
+implies $k = 0$; from the couple pattern implies $k = 1$; from the
+contrast pattern implies $k = -1$.
+
+## How to test them
+
+For each pattern, fit the constrained model and compare to a
+saturated model via a likelihood ratio test. A non-significant
+*p*-value supports the pattern. (See Fitzpatrick et al. (2016) for
+the original Mplus tutorial, replicated for `lavaan` in the
+[SEM wide tutorial](../tutorials/distinguishable/sem-wide.qmd).)
+
+For the **actor-only** pattern:
+
+```
+b_A * X_A + b_A * X_P
+# both labels identical = constrained to be equal
+# but the partner effect is allowed to be zero:
+#  - "actor-only" model sets the partner effect to zero explicitly
+```
+
+For the **couple** pattern:
+
+```
+b_A * X_A + b_P * X_P   where b_P is constrained equal to b_A
+# single label, two paths
+```
+
+For the **contrast** pattern:
+
+```
+b_A * X_A + (-b_A) * X_P
+# the partner label is the negation of the actor label
+```
+
+## Why the patterns matter
+
+Two reasons.
+
+**Statistical.** The partner effect is typically estimated with
+much less power than the actor effect, because the partner effect's
+denominator is the dyad-level variance of $X$ (since the partner
+effect uses the partner's $X$ as a predictor, the variation is
+across dyads, not within). The k-pattern tests use the actor
+effect as a *prior* and ask whether the partner effect is a
+specific fraction of it. This is far more powerful than asking
+whether the partner effect is zero.
+
+**Substantive.** The pattern is a theoretical claim. "Partners
+buffer each other's stress" is a couple pattern. "Conflict in one
+partner erodes the other's well-being" is a contrast pattern.
+Saying *which* pattern fits your data is a meaningful scientific
+result, not just a statistical convenience.
+
+## Reading the partner effect
+
+If the actor effect is $-0.30$ and the partner effect is $-0.15$,
+then $k = 0.5$. The partner effect is half the actor effect, and
+in the same direction. This is closest to a couple pattern
+($k = 1$), but the partner effect is *weaker* than the actor
+effect. Whether this is "close enough" to a couple pattern to
+treat as one is a substantive judgment, supported by the
+likelihood ratio test.
+
+## References
+
+- Kenny, D. A., & Ledermann, T. (2010). Detecting, measuring, and
+  testing dyadic patterns in the Actor–Partner Interdependence
+  Model. *Journal of Family Psychology, 24*(3), 359–366.
+- Fitzpatrick, J., Gareau, A., Lafontaine, M.-F., & Gaudreau, P.
+  (2016). How to use the Actor–Partner Interdependence Model to
+  estimate different dyadic patterns in Mplus: A step-by-step
+  tutorial. *Tutorials in Quantitative Methods for Psychology,
+  12*(1), 74–86.

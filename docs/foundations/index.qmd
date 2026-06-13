@@ -1,0 +1,81 @@
+---
+title: "Foundations"
+subtitle: "What every APIM analyst needs to know before opening R"
+---
+
+Before you fit your first model, you need to know **why** the APIM
+exists. The four pages in this section give you the conceptual
+grounding. They are short on purpose — read them in order, and then
+move on to the [tutorials](../tutorials/indistinguishable/index.qmd).
+
+::: {.callout-note}
+## Prerequisites
+Linear regression. The R basics of loading data, fitting a model, and
+reading a `summary()`. Nothing else.
+:::
+
+## The four concepts
+
+::: {.card-grid}
+
+::: {.card}
+### 1. [Non-independence]{.card-title-link}
+
+Why two people in the same dyad violate the standard regression
+assumption of independent residuals — and why this matters for *every*
+downstream test.
+
+[Read →](non-independence.qmd)
+:::
+
+::: {.card}
+### 2. [Distinguishability]{.card-title-link}
+
+The single most important design decision in dyadic analysis. Are the
+two members of each dyad interchangeable, or is one of them marked by
+gender, role, or time?
+
+[Read →](distinguishability.qmd)
+:::
+
+::: {.card}
+### 3. [k-patterns]{.card-title-link}
+
+Four ways partner and actor effects can combine — actor-only, couple,
+contrast, and mixed. How to test which pattern your data fit.
+
+[Read →](kpatterns.qmd)
+:::
+
+::: {.card}
+### 4. [Data structures]{.card-title-link}
+
+Long format (one row per person) vs. wide format (one row per dyad).
+When to use which. The general "doubling" rule.
+
+[Read →](data-structures.qmd)
+:::
+
+:::
+
+## A 60-second recap
+
+::: {.callout-tip}
+## The APIM in one paragraph
+
+Two people in a dyad share an environment, a history, and a future.
+Their scores are correlated for reasons that have nothing to do with
+causation. Standard regression ignores this and gives you standard
+errors that are too small. The Actor–Partner Interdependence Model
+fixes this by **pooling the dyad as the unit of analysis** (so each
+dyad contributes one piece of information, not two) and by
+**decomposing every effect into an actor part and a partner part**.
+The model is the same whether your dyad is indistinguishable (siblings,
+strangers paired in an experiment) or distinguishable (romantic
+partners, parent and child). What changes is the constraint you
+impose on the actor and partner slopes.
+:::
+
+Once these four ideas are clear, the eight tutorials in this site
+should feel like variations on a single theme rather than eight
+unrelated recipes.

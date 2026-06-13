@@ -1,0 +1,115 @@
+---
+title: "Distinguishable dyads"
+subtitle: "Adding gender (or any distinguishing variable) to the APIM"
+---
+
+When the two members of each dyad can be told apart — by gender,
+role, age, or any other stable marker — the actor and partner slopes
+are no longer forced to be equal. You can then ask whether the
+*difference* between actor and partner slopes is itself a
+substantively interesting quantity, and you can test whether gender
+moderates any of the actor or partner effects.
+
+The four tutorials in this section cover the three standard ways to
+fit a distinguishable APIM in R.
+
+::: {.card-grid}
+
+::: {.card}
+### [Tutorial 04 — Distinguishable dyads: MLM moderator]{.card-title-link}
+
+Long format, `lme4::lmer`. Add `gender` as a moderator of every
+actor and partner effect. Simple slopes. Likelihood ratio test for
+the gender × predictor interaction block.
+
+<span class="tag tag-mlm-moderator">MLM + gender</span>
+<span class="tag tag-intermediate">Intermediate</span>
+
+[Open tutorial →](mlm-moderator.qmd)
+:::
+
+::: {.card}
+### [Tutorial 05 — Distinguishable dyads: SEM with moderation]{.card-title-link}
+
+Long format, `lavaan`. Manual interaction columns. Two-level SEM
+with the within-dyad interactions and the between-dyad moderators.
+Calculated simple slopes.
+
+<span class="tag tag-sem-moderation">SEM + gender</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open tutorial →](sem-moderation.qmd)
+:::
+
+::: {.card}
+### [Tutorial 06 — Distinguishable dyads: SEM wide]{.card-title-link}
+
+Wide format, `lavaan`. The three-model sequence: unconstrained,
+slopes-equal, fully constrained. The three nested likelihood
+ratio tests. The Olsen & Kenny (2006) indistinguishability test.
+
+<span class="tag tag-sem-wide">SEM wide</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open tutorial →](sem-wide.qmd)
+:::
+
+::: {.card}
+### [Tutorial 07 — Two-intercept models]{.card-title-link}
+
+Long format, `lme4::lmer`. The parameterisation trick: suppress
+the global intercept, replace it with two role-specific intercepts.
+Its SEM analogue in wide format.
+
+<span class="tag tag-mlm-two-intercept">Two-intercept</span>
+<span class="tag tag-intermediate">Intermediate</span>
+
+[Open tutorial →](two-intercept.qmd)
+:::
+
+:::
+
+## How the four tutorials relate
+
+The four approaches give you the same quantities — actor and partner
+slopes, separated by role — but they package the model differently.
+
+- **MLM moderator (04).** A single long-format model. Gender is a
+  factor that interacts with every predictor. The intercept is the
+  reference-group (male) intercept; the female intercept is the
+  reference + the gender main effect.
+- **SEM with moderation (05).** The same idea in `lavaan`. Manual
+  interaction columns make the within-dyad level of the model
+  transparent. The two-level specification places the gender
+  interactions at the within-dyad level and the dyad-level
+  moderators at the between-dyad level.
+- **SEM wide (06).** Wide format, with separate paths for the two
+  roles. The three-model sequence (unconstrained → slopes-equal →
+  fully constrained) is the classical Olsen & Kenny (2006)
+  indistinguishability test.
+- **Two-intercept (07).** A special parameterisation that estimates
+  both intercepts directly (rather than as reference + main effect).
+  Useful when you want to report absolute group means.
+
+The MLM and SEM specifications should give you nearly identical
+estimates. The MLM is usually easier to read; the SEM gives you
+fit indices and the k-pattern tests for free.
+
+## A note on the data
+
+The `dyad_data.RData` dataset has a single DGP-level gender
+difference: a 0.15-point gap in the male and female intercepts
+($\alpha_m = 5.00$, $\alpha_f = 4.85$). The actor and partner slopes
+are *equal* across gender in the DGP. This means:
+
+- The [MLM moderator](mlm-moderator.qmd) likelihood ratio test
+  should *not* reject the null of no gender × predictor interaction.
+- The [SEM wide](sem-wide.qmd) slope-equality test should be
+  non-significant.
+- The [SEM wide](sem-wide.qmd) intercept-equality test *should* be
+  significant, because the male and female intercepts differ by 0.15.
+
+This is the standard empirical pattern: dyad members are
+distinguishable by *means* but not by *effects*. The [two-intercept
+tutorial](two-intercept.qmd) is the recommended specification for
+this case.

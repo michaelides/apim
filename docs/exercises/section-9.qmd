@@ -1,0 +1,55 @@
+---
+title: "Section 9 — Integrative exercise"
+---
+
+# Section 9 — Integrative exercise
+
+**What you are practising:** combining everything you have learned to answer a single, fully-specified research question.
+
+::: {.callout-note}
+## Goal
+Pick one of the three outcomes. Build a kitchen-sink multilevel model and the matching wide-format SEM. Report a 4–6 sentence interpretation paragraph.
+:::
+
+## Tasks
+
+1. **Choose an outcome.** Pick whichever of `engagement`, `performance`, `creativity` is most interesting to you.
+
+2. **Build a kitchen-sink multilevel model.** Include:
+   - All three actor predictors
+   - All three partner predictors
+   - All three dyad-level moderators
+   - The focal crossover-by-moderator interaction for your chosen outcome
+   - A random intercept for `dyad_id`
+
+3. **Build the corresponding wide-format SEM.** Include the manual product indicator for the focal interaction and the computed simple-slope parameters at three levels of the moderator (low, mean, high).
+
+4. **Report:**
+   - The actor and partner effect estimates with standard errors
+   - The focal interaction coefficient from both approaches
+   - The three simple slopes (low, mean, high levels of the moderator)
+   - The SEM fit indices (chi-square, df, p-value, CFI, TLI, RMSEA, SRMR)
+
+5. **Write a 4–6 sentence interpretation paragraph** covering:
+   - The substantive size and direction of the partner crossover effect
+   - Whether the moderator meaningfully changes that effect
+   - A plain-language interpretation
+   - One limitation or follow-up question
+
+## Reflection prompt
+
+If you had to present this in a 5-minute conference talk, which figure and which one-sentence result would you lead with?
+
+::: {.callout-tip collapse="true"}
+## Hints & solution outline
+
+**No single correct answer.** This section is graded on the *reasoning* and the *articulation*, not the exact numbers.
+
+**Reference tutorials:** [Section 2](../../tutorials/indistinguishable/mlm.qmd) (full APIM), [Section 4](../../tutorials/distinguishable/mlm-moderator.qmd) (gender moderation), [Section 8](../../tutorials/moderated/hahn2014.qmd) (focal interaction).
+
+**For the figure.** A two-panel plot is the standard. Left panel: the partner crossover effect at low and high levels of the moderator (slope plot). Right panel: the predicted outcome as a function of the partner predictor, with one line per moderator level. The `interactions::interact_plot()` function produces a version of the right panel automatically.
+
+**For the lead sentence.** A strong lead sentence states the *direction* and *magnitude* of the focal effect, names the moderator, and gives the practical takeaway. Example structure: *"A one-SD increase in [partner predictor] is associated with a [direction] change of [magnitude] units in [outcome], and this effect is [stronger/weaker/unchanged] among [dyads with X]."*
+
+**What to record.** The full report (numbers, fit indices, interpretation paragraph) is the deliverable. The reflection prompt asks for self-critique: which figure and which sentence would you lead with? Why that one?
+:::

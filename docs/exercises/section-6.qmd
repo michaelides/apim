@@ -1,0 +1,47 @@
+---
+title: "Section 6 — Distinguishable dyads: SEM wide"
+---
+
+# Section 6 — Distinguishable dyads: SEM wide
+
+**What you are practising:** the unconstrained / slopes-equal / fully-constrained model sequence and the three nested likelihood ratio tests.
+
+**Reference:** [Distinguishable dyads: SEM wide tutorial](../../tutorials/distinguishable/sem-wide.qmd).
+
+::: {.callout-note}
+## Goal
+For each outcome, fit the three wide-format SEMs and run the three nested LRTs. Build a fit-indices table.
+:::
+
+## Tasks
+
+1. **Three wide-format SEMs for each outcome.** Use `ddw2`:
+   - **Unconstrained** — separate parameter labels for actor and partner paths.
+   - **Slopes equal** — one label per path (so the actor and partner slopes share a label) but free intercepts.
+   - **Fully constrained** — equal slopes, equal intercepts, equal residual variances.
+
+2. **Three nested LRTs for each outcome.** Use `lavTestLRT()`:
+   - LRT 1: unconstrained vs slopes-equal (do slopes differ by gender?).
+   - LRT 2: slopes-equal vs fully-constrained (do intercepts differ?).
+   - LRT 3: unconstrained vs fully-constrained (overall indistinguishability).
+
+3. **Fit-indices table.** Use `fitMeasures()` to extract the standard SEM fit measures (`chisq`, `df`, `pvalue`, `cfi`, `tli`, `rmsea`, `srmr`) for each model, and arrange them side by side, rounded to four decimals.
+
+## Reflection prompt
+
+For which outcome is the slope-equality test (LRT 1) most likely to be non-significant — and is that consistent with the single `actor_sdt × gender_male` interaction in the data-generating process?
+
+::: {.callout-tip collapse="true"}
+## Hints & solution outline
+
+**Tutorial reference:** [SEM wide](../../tutorials/distinguishable/sem-wide.qmd). The three models are in the section "Model 1, 2, 3"; the LRTs are in "The three nested LRTs"; the fit-indices table is at the end.
+
+**Substitutions:**
+- `ddw` → `ddw2`
+- The model needs to be expanded to include six predictors instead of four
+- Use `engagement_a` / `engagement_p` as the outcome pair (and the same for the other two outcomes)
+
+**What to expect.** LRT 1 is most likely to be non-significant for `performance` and `creativity` (where the DGP has no gender × slope interactions). For `engagement`, LRT 1 is most likely to be significant because of the one non-zero `actor_sdt × gender_male` interaction.
+
+**What to record.** A small table with three rows (one per outcome) and the LRT 1 / LRT 2 / LRT 3 chi-squares and p-values.
+:::

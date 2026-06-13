@@ -1,0 +1,101 @@
+{
+  "tutorials/indistinguishable/index.qmd": {
+    "index.html": "85474c33"
+  },
+  "tutorials/indistinguishable/mlm.qmd": {
+    "mlm.html": "4dcd1792"
+  },
+  "tutorials/indistinguishable/sem.qmd": {
+    "sem.html": "a75eda92"
+  },
+  "tutorials/distinguishable/mlm-moderator.qmd": {
+    "mlm-moderator.html": "6780f11e"
+  },
+  "tutorials/distinguishable/index.qmd": {
+    "index.html": "00c84ddc"
+  },
+  "tutorials/distinguishable/sem-moderation.qmd": {
+    "sem-moderation.html": "1000fca1"
+  },
+  "tutorials/distinguishable/sem-wide.qmd": {
+    "sem-wide.html": "a9c8bb8f"
+  },
+  "tutorials/distinguishable/two-intercept.qmd": {
+    "two-intercept.html": "11b1b837"
+  },
+  "tutorials/moderated/index.qmd": {
+    "index.html": "c9e9826c"
+  },
+  "tutorials/moderated/hahn2014.qmd": {
+    "hahn2014.html": "3388d97a"
+  },
+  "foundations/index.qmd": {
+    "index.html": "2e16d01f"
+  },
+  "foundations/non-independence.qmd": {
+    "non-independence.html": "5fce019e"
+  },
+  "foundations/distinguishability.qmd": {
+    "distinguishability.html": "868235cd"
+  },
+  "foundations/kpatterns.qmd": {
+    "kpatterns.html": "977118e4"
+  },
+  "foundations/data-structures.qmd": {
+    "data-structures.html": "9eefd2a9"
+  },
+  "exercises/index.qmd": {
+    "index.html": "bec257ae"
+  },
+  "exercises/section-4.qmd": {
+    "section-4.html": "236727b0"
+  },
+  "exercises/section-8.qmd": {
+    "section-8.html": "b4866464"
+  },
+  "exercises/section-1.qmd": {
+    "section-1.html": "7e14fed5"
+  },
+  "exercises/section-2.qmd": {
+    "section-2.html": "85f1484a"
+  },
+  "exercises/section-5.qmd": {
+    "section-5.html": "2fd49aec"
+  },
+  "exercises/section-6.qmd": {
+    "section-6.html": "cee1d6aa"
+  },
+  "exercises/section-7.qmd": {
+    "section-7.html": "50c60269"
+  },
+  "exercises/section-9.qmd": {
+    "section-9.html": "d3eca989"
+  },
+  "exercises/section-3.qmd": {
+    "section-3.html": "0cd0619b"
+  },
+  "references/index.qmd": {
+    "index.html": "36bc8193"
+  },
+  "about/index.qmd": {
+    "index.html": "5c662761"
+  },
+  "about/install.qmd": {
+    "install.html": "34549d88"
+  },
+  "about/how-to-cite.qmd": {
+    "how-to-cite.html": "45378009"
+  },
+  "data/index.qmd": {
+    "index.html": "5e43f3dd"
+  },
+  "data/dyad-data.qmd": {
+    "dyad-data.html": "5b594bd3"
+  },
+  "data/exercise-data.qmd": {
+    "exercise-data.html": "1e7da8e9"
+  },
+  "index.qmd": {
+    "index.html": "72088cb5"
+  }
+}

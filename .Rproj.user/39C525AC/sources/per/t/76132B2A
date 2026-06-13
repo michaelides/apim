@@ -1,0 +1,26 @@
+{
+    "id": "76132B2A",
+    "path": "~/Documents/Research/Workshops_Seminars/EAOHP 2026/workshop/scripts/01_simulate_data.R",
+    "project_path": "scripts/01_simulate_data.R",
+    "type": "r_source",
+    "hash": "1311696532",
+    "contents": "",
+    "dirty": false,
+    "created": 1780734946469.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "187,0",
+        "scrollLine": "22"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1780586361,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1780586361,
+    "read_only": false,
+    "read_only_alternatives": []
+}

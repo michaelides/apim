@@ -1,0 +1,51 @@
+---
+title: "Section 4 — Distinguishable dyads: MLM moderator"
+---
+
+# Section 4 — Distinguishable dyads: MLM moderator
+
+**What you are practising:** adding `gender` as a moderator of actor and partner effects in a multilevel model.
+
+**Reference:** [Distinguishable dyads: MLM moderator tutorial](../../tutorials/distinguishable/mlm-moderator.qmd).
+
+::: {.callout-note}
+## Goal
+For each outcome, compare a baseline (no gender interactions) with a full moderator model (gender × every actor and partner predictor), and report the simple slopes for each gender.
+:::
+
+## Tasks
+
+1. **Baseline model.** For each outcome, fit the full APIM with no gender interactions (the same as Section 2). Save as `model_base_eng`, `model_base_perf`, `model_base_creat`.
+
+2. **Full moderator model.** For each outcome, wrap the six predictors in parentheses and multiply by `gender`, so that every actor and partner predictor interacts with gender. Keep the three moderators as main effects only (they have no within-dyad variance). Save as `mod_eng`, `mod_perf`, `mod_creat`.
+
+3. **LRT.** For each outcome, compare the baseline and the moderator model with `anova()`.
+
+4. **Simple slopes.** For each outcome, use `interactions::sim_slopes()` to extract the actor effects separately for each gender (`johnson_neyman = FALSE`). Repeat for any partner effect whose gender interaction is significant.
+
+5. **Profile-likelihood confidence intervals** for each of the three moderator models.
+
+## Reflection prompt
+
+The data-generating process specifies that only `actor_sdt × gender_male` on `engagement` is non-zero. Do the simple-slope plots and LRTs pick this up cleanly, or do other interactions appear spuriously significant?
+
+::: {.callout-tip collapse="true"}
+## Hints & solution outline
+
+**Tutorial reference:** [MLM moderator](../../tutorials/distinguishable/mlm-moderator.qmd). The model syntax is in Step 2; the LRT is in Step 3; the simple slopes are in Step 4.
+
+**Substitutions:**
+- `ddl` → `ddl2`
+- Replace the four within-dyad predictors with the six (3 actor + 3 partner)
+- The full moderator formula becomes:
+  ```r
+  satisfaction ~ (affect + partner_affect + sdt + partner_sdt +
+                  job_crafting + partner_job_crafting) * gender +
+                  live_together + years_together +
+                  time_spent_this_morning_together + (1 | dyad_id)
+  ```
+
+**What to expect.** Only the `actor_sdt × gender_male` interaction on `engagement` is non-zero in the DGP. The LRT for `engagement` should reject (because of that one true interaction), while the LRTs for `performance` and `creativity` should not reject. Other interactions may appear spuriously significant at the conventional 0.05 level, especially with six predictors and N = 250 couples.
+
+**What to record.** For each outcome: *"LRT χ² = XX.X, df = 6, p = .XXXX. The simple slopes of [focal actor effect] are X.XX (male) vs X.XX (female)."*
+:::

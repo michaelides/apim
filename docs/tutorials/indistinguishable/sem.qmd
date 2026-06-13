@@ -1,0 +1,200 @@
+---
+title: "Indistinguishable dyads: SEM in wide format"
+subtitle: "Wide format, lavaan, equality-constrained actor and partner slopes"
+---
+
+The multilevel model in the [previous tutorial](mlm.qmd) is the
+workhorse for APIM work, but the SEM specification is more
+transparent about *which* slopes are constrained equal, and it gives
+you standard fit indices (CFI, TLI, RMSEA, SRMR) that you can
+report alongside the parameter estimates. This tutorial fits the
+indistinguishable APIM in `lavaan` with the Olsen & Kenny (2006)
+specification.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(lavaan)
+library(dplyr)
+
+load("../../../data/dyad_data.RData")
+
+cat("Wide format:", nrow(ddw), "rows,", ncol(ddw), "columns\n")
+```
+
+## The model
+
+In wide format, the two dyad members are represented by separate
+columns with the suffixes `_a` and `_p`. The Olsen & Kenny (2006)
+specification constrains the actor and partner slopes to be equal
+by giving the two paths the same label.
+
+```{r}
+#| label: model-syntax
+
+model_indist <- '
+  # Actor (the "_a" member)
+  satisfaction_a ~ a_wnc*wnc_a + p_wnc*wnc_p +
+                   a_rec*recovery_a + p_rec*recovery_p +
+                   c_child*has_children + c_dual*dual_earner
+
+  # Partner (the "_p" member)
+  satisfaction_p ~ a_wnc*wnc_p + p_wnc*wnc_a +
+                   a_rec*recovery_p + p_rec*recovery_a +
+                   c_child*has_children + c_dual*dual_earner
+
+  # Equal intercepts
+  satisfaction_a ~ alpha*1
+  satisfaction_p ~ alpha*1
+
+  # Equal residual variances
+  satisfaction_a ~~ sigma2*satisfaction_a
+  satisfaction_p ~~ sigma2*satisfaction_p
+
+  # Predictor variances and covariances
+  wnc_a ~~ wnc_p
+  recovery_a ~~ recovery_p
+
+  # Residual covariance (the dyad-level non-independence)
+  satisfaction_a ~~ res_cov*satisfaction_p
+'
+```
+
+::: {.callout-tip}
+## Reading the labels
+
+- `a_wnc` is used for *both* the path `wnc_a → satisfaction_a` (the
+  actor effect on the actor's own satisfaction) and the path
+  `wnc_p → satisfaction_p` (the actor effect on the partner's
+  satisfaction). Same label = constrained equal.
+- `p_wnc` is used for the partner effect. The constraint forces
+  `a_wnc = p_wnc` to be tested separately — the [distinguishable
+  SEM wide tutorial](../distinguishable/sem-wide.qmd) shows how.
+- `alpha`, `sigma2`, and `res_cov` are shared labels for the
+  intercepts, residual variances, and residual covariance.
+:::
+
+## Fit the model
+
+```{r}
+#| label: fit
+
+fit_indist <- sem(model_indist, data = ddw)
+
+summary(fit_indist, standardized = TRUE, fit.measures = TRUE)
+```
+
+## Compare to the multilevel model
+
+The point estimates should match the [MLM tutorial](mlm.qmd) to
+three or four decimal places. The differences are in the standard
+errors (Wald vs. profile-likelihood) and in the inferential
+machinery (likelihood ratio tests in `lavaan` vs. in `lme4`).
+
+```{r}
+#| label: compare
+#| message: false
+#| warning: false
+
+library(lme4)
+library(lmerTest)
+
+apim_mlm <- lmer(
+  satisfaction ~ wnc + partner_wnc + recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+cat("--- MLM coefficients ---\n")
+print(round(fixef(apim_mlm), 4))
+
+cat("\n--- SEM coefficients (regression) ---\n")
+pe <- parameterEstimates(fit_indist, standardized = TRUE)
+pe[pe$op == "~", c("lhs", "rhs", "est", "se", "pvalue")]
+```
+
+The two sets of estimates should be nearly identical.
+
+## Fit indices
+
+```{r}
+#| label: fit-indices
+
+fits <- c("chisq", "df", "pvalue", "cfi", "tli", "rmsea", "srmr")
+fitMeasures(fit_indist, fits)
+```
+
+The chi-square test of exact fit is a strict test; with N = 100
+dyads and a model that is correctly specified for the data, you
+should still see a significant chi-square — this is a well-known
+limitation of the chi-square test for SEM. The other indices
+(CFI, TLI, RMSEA, SRMR) are alternative fit criteria that are less
+sensitive to sample size.
+
+For an *indistinguishable* model on dyadic data, the SRMR is the
+most informative index. Values below 0.08 are conventionally
+considered acceptable. (See the [Hu & Bentler (1999) cutoffs
+discussion](../../references/index.qmd) for context.)
+
+## Test the equality constraint
+
+The most informative test for indistinguishable dyads is whether
+the equality constraint fits as well as the unconstrained model.
+Fit the unconstrained model and compare.
+
+```{r}
+#| label: lrt-indistinguishability
+
+model_unconstrained <- '
+  satisfaction_a ~ a_wnc_h*wnc_a + p_wnc_h*wnc_p +
+                   a_rec_h*recovery_a + p_rec_h*recovery_p +
+                   c_child_h*has_children + c_dual_h*dual_earner
+  satisfaction_p ~ a_wnc_w*wnc_p + p_wnc_w*wnc_a +
+                   a_rec_w*recovery_p + p_rec_w*recovery_a +
+                   c_child_w*has_children + c_dual_w*dual_earner
+  satisfaction_a ~ int_a*1
+  satisfaction_p ~ int_p*1
+  satisfaction_a ~~ var_a*satisfaction_a
+  satisfaction_p ~~ var_p*satisfaction_p
+  wnc_a ~~ wnc_p
+  recovery_a ~~ recovery_p
+  satisfaction_a ~~ res_cov*satisfaction_p
+'
+
+fit_unconstrained <- sem(model_unconstrained, data = ddw)
+
+cat("--- LRT: unconstrained vs indistinguishable ---\n")
+lavTestLRT(fit_unconstrained, fit_indist)
+```
+
+A non-significant *p*-value supports indistinguishability. In our
+data, the equality constraint is tenable, which is consistent with
+the [data-generating process](../../data/dyad-data.qmd) (equal
+slopes across gender).
+
+## What to take away
+
+::: {.callout-takeaway}
+## Key takeaways
+
+- The wide-format SEM gives you the same point estimates as the
+  MLM, with explicit labels for which slopes are constrained equal.
+- The Olsen & Kenny (2006) specification is the standard reference
+  for this model.
+- The likelihood ratio test against the unconstrained model is the
+  gold standard for testing distinguishability.
+:::
+
+## What to read next
+
+- The [distinguishable SEM wide
+  tutorial](../distinguishable/sem-wide.qmd) generalises this
+  specification to the three-model sequence (unconstrained →
+  slopes-equal → fully constrained) and adds the k-pattern tests.
+- The [SEM with moderation
+  tutorial](../distinguishable/sem-moderation.qmd) shows how to
+  add gender × predictor interactions at the within-dyad level.

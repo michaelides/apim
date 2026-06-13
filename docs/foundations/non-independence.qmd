@@ -1,0 +1,103 @@
+---
+title: "Non-independence"
+---
+
+```{=tex}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\arabic{section}.}
+```
+
+# Non-independence
+
+The single assumption that dyadic data break.
+
+## The assumption
+
+Every ordinary least squares regression you have ever run carries a
+quiet assumption: **the residuals are independent of one another**. If
+you fit a model predicting life satisfaction from income, the
+regression assumes that Person A's residual is unrelated to Person
+B's residual. For cross-sectional survey data on strangers, this is
+approximately true. For two people in the same couple, it is not even
+approximately true.
+
+## Why dyads are non-independent
+
+Two members of a dyad share at least four sources of dependence:
+
+1. **Shared environment.** They live in the same house, sleep in the
+   same bed, eat at the same table. Weather, neighbours, noise, and
+   smell affect them together.
+2. **Assortative mating.** Partners select each other (in part) on
+   the very variables you are studying. High-income people marry
+   high-income people. Extraverted people marry extraverted people.
+3. **Mutual influence.** Over time, partners converge. They share
+   friends, develop shared habits, and align their values.
+4. **Common-method effects.** Both partners fill in your
+   relationship-satisfaction scale on the same evening, after the
+   same argument. Their scores move together for purely measurement
+   reasons.
+
+The result is a positive correlation between the two partners'
+residuals, after you have controlled for all the predictors in your
+model. The size of that correlation is the **intraclass correlation
+(ICC)**.
+
+## The ICC, formally
+
+For a null model with a random intercept per dyad,
+$u_{0j} \sim N(0, \tau^2)$, and residual $\varepsilon_{ij} \sim N(0,
+\sigma^2)$, the ICC is
+
+$$
+\text{ICC} = \frac{\tau^2}{\tau^2 + \sigma^2}.
+$$
+
+This is the proportion of total outcome variance that lives *between*
+dyads. If the ICC is 0, the dyad is a fiction and standard regression
+is fine. If the ICC is 0.3, a third of the outcome variance is shared
+by the two partners, and ignoring it is a serious problem.
+
+::: {.callout-warning}
+## Rule of thumb
+Any ICC above 0.05 is enough to make OLS standard errors and
+significance tests noticeably wrong. Most dyadic datasets in the
+social sciences have ICCs between 0.20 and 0.50.
+:::
+
+## What goes wrong if you ignore it
+
+If you run OLS on 200 people (100 dyads) and the true ICC is 0.30,
+your effective sample size is not 200 — it is closer to
+
+$$
+N_{\text{eff}} = \frac{N \cdot k}{1 + (k - 1) \cdot \text{ICC}} = \frac{200 \cdot 2}{1 + 1 \cdot 0.30} \approx 154.
+$$
+
+You have lost 23% of your information. Standard errors are
+underestimated, *p*-values are too small, and you will report
+significant results that you should not.
+
+The [tutorial on indistinguishable dyads with multilevel
+modelling](../tutorials/indistinguishable/mlm.qmd) shows you how to
+estimate the ICC for a real dataset and how the multilevel model
+fixes the inference problem automatically.
+
+## What the APIM adds
+
+The APIM does not merely *accommodate* non-independence — it
+**exploits** it. The shared environment is the partner effect. The
+assortative mating is the baseline correlation between the two
+partners' predictors. The mutual influence is the actor and partner
+slopes. Decomposing the effect of one partner on the other, in a
+model that already accounts for the dyad-level clustering, is what
+distinguishes APIM from a single-level regression with a cluster
+correction.
+
+## References
+
+- Kenny, D. A., Kashy, D. A., & Cook, W. L. (2006). *Dyadic data
+  analysis.* Guilford Press. (Chapter 2.)
+- Kashy, D. A., Donnellan, M. B., & Ackerman, R. A. (2017). Dyadic
+  analysis. In A. L. Vangelisti & D. Perlman (Eds.), *The Cambridge
+  handbook of personal relationships* (2nd ed., pp. 101–115). CUP.

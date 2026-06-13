@@ -1,0 +1,56 @@
+---
+title: "Moderated APIM"
+subtitle: "Dyad-level moderators of actor and partner effects"
+---
+
+The full APIM workflow: a dyad-level moderator (e.g. presence of
+children, relationship length, time spent together) shapes one or
+more of the actor and partner effects. The focal question is
+typically whether the *partner crossover* effect is moderated — is
+the partner's influence on me stronger or weaker in some dyads
+than in others?
+
+::: {.card-grid}
+
+::: {.card}
+### [Tutorial 08 — Moderated APIM: Hahn, Binnewies, & Dormann (2014)]{.card-title-link}
+
+Replicates the theoretical model of Hahn, Binnewies, & Dormann
+(2014, *Journal of Vocational Behavior*). The presence of
+children moderates the partner WNC crossover effect. Both MLM and
+SEM specifications.
+
+<span class="tag tag-mlm-moderated">MLM + SEM</span>
+<span class="tag tag-advanced">Advanced</span>
+
+[Open tutorial →](hahn2014.qmd)
+:::
+
+:::
+
+## When to use this specification
+
+A moderated APIM is appropriate when:
+
+- You have a **dyad-level variable** (no within-dyad variance) that
+  you hypothesised moderates one or more of the actor or partner
+  effects. Examples: presence of children, relationship length,
+  cultural context, study site.
+- Your **focal question** is whether the partner crossover effect
+  is itself moderated. This is the most common form of the
+  moderated APIM in the literature.
+- You want to test the moderation with both **MLM (direct
+  interaction terms)** and **SEM (manual product indicators)** so
+  that you can compare the two.
+
+## The two ways to fit a moderated APIM
+
+| Approach | Spec | When to use |
+|---|---|---|
+| **MLM** | Add `predictor:moderator` to the `lmer` formula | Quick, well-powered, default approach |
+| **SEM wide** | Create a product indicator in the data, add to the `lavaan` model | Useful when you want fit indices or simple slopes from the SEM, or for visualisation |
+
+The two approaches should give you nearly identical point estimates
+for the moderation. The MLM is the workhorse; the SEM is most
+useful when you already have a wide-format SEM in your pipeline and
+want to extend it.

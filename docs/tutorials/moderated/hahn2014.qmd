@@ -1,0 +1,228 @@
+---
+title: "Moderated APIM: Hahn, Binnewies, & Dormann (2014)"
+subtitle: "Replicating the children × partner WNC interaction"
+---
+
+The headline result of Hahn, Binnewies, & Dormann (2014, *Journal
+of Vocational Behavior*) is that the presence of children in a
+household moderates the partner crossover effect of work–nonwork
+conflict on relationship satisfaction. Couples with children
+*buffer* the negative crossover; couples without children show
+the full negative effect.
+
+This tutorial replicates that finding with the simulated
+`dyad_data` dataset, using both multilevel and SEM specifications.
+The DGP has a small but detectable interaction
+(`int_child_pwnc = +0.10`) — your likelihood ratio tests should
+recover it.
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(lme4)
+library(lmerTest)
+library(lavaan)
+library(dplyr)
+library(interactions)
+
+load("../../../data/dyad_data.RData")
+
+cat("Dyads with children:    ", sum(ddw$has_children == 1), "of", nrow(ddw), "\n")
+cat("Dyads without children: ", sum(ddw$has_children == 0), "of", nrow(ddw), "\n")
+```
+
+## MLM specification
+
+The baseline APIM (no moderation) is the same as the
+[indistinguishable tutorial](../indistinguishable/mlm.qmd).
+
+```{r}
+#| label: mlm-base
+
+model_base <- lmer(
+  satisfaction ~ wnc + partner_wnc + recovery + partner_recovery +
+    has_children + dual_earner + (1 | dyad_id),
+  data = ddl
+)
+
+summary(model_base)
+```
+
+The moderated model adds the two interaction terms: partner WNC ×
+children, and actor WNC × children.
+
+```{r}
+#| label: mlm-moderated
+
+model_mod <- lmer(
+  satisfaction ~ wnc + partner_wnc + recovery + partner_recovery +
+    has_children + dual_earner +
+    partner_wnc:has_children + wnc:has_children +
+    (1 | dyad_id),
+  data = ddl
+)
+
+summary(model_mod)
+```
+
+### Likelihood ratio test
+
+```{r}
+#| label: mlm-lrt
+
+lrt <- anova(model_base, model_mod)
+print(lrt)
+```
+
+::: {.callout-tip}
+## Reading the LRT
+The *p*-value tests the joint null that both interaction terms
+(`partner_wnc:has_children` and `wnc:has_children`) are zero. In
+our DGP, only the partner-wnc interaction is non-zero (the
+actor-wnc interaction is zero), so the LRT is dominated by the
+partner-wnc effect.
+:::
+
+### Simple slopes
+
+The `interactions` package extracts the partner-WNC effect at each
+level of the moderator. With a binary moderator (`has_children`),
+this is a two-line output: the slope among dyads *with* children
+and the slope among dyads *without* children.
+
+```{r}
+#| label: simple-slopes
+
+sim_pwnc <- sim_slopes(model_mod, pred = partner_wnc,
+                       modx = has_children, johnson_neyman = FALSE)
+print(sim_pwnc)
+```
+
+::: {.callout-takeaway}
+## Substantive interpretation
+
+Among dyads *without* children, the partner-WNC slope is
+`partner_wnc + 0 * partner_wnc:has_children ≈ -0.15`. Among dyads
+*with* children, the slope is `partner_wnc + 1 *
+partner_wnc:has_children ≈ -0.05`. The negative partner crossover
+effect is *attenuated* (buffered) for couples with children —
+consistent with Hahn et al. (2014).
+:::
+
+### Visualise the interaction
+
+```{r}
+#| label: plot-partner
+#| fig-cap: "Partner WNC effect on satisfaction, by presence of children. The negative slope is flatter for couples with children."
+#| fig-width: 7
+#| fig-height: 4
+
+interact_plot(model_mod, pred = partner_wnc,
+              modx = has_children, plot.points = TRUE)
+```
+
+## SEM specification (wide format)
+
+The SEM analogue creates manual product indicators in the wide
+data and fits a wide-format model with the products included.
+
+```{r}
+#| label: sem-prep
+
+ddw$wnc_a_children <- ddw$wnc_a * ddw$has_children
+ddw$wnc_p_children <- ddw$wnc_p * ddw$has_children
+```
+
+```{r}
+#| label: sem-moderated
+
+model_sem_mod <- '
+  # Actor (male) paths
+  satisfaction_a ~ a*wnc_a + p*wnc_p + ar*recovery_a + pr*recovery_p +
+    c*has_children + d*dual_earner +
+    a_int*wnc_a_children + p_int*wnc_p_children
+
+  # Partner (female) paths
+  satisfaction_p ~ a*wnc_p + p*wnc_a + ar*recovery_p + pr*recovery_a +
+    c*has_children + d*dual_earner +
+    a_int*wnc_p_children + p_int*wnc_a_children
+
+  # Intercepts (equal)
+  satisfaction_a ~ int*1
+  satisfaction_p ~ int*1
+
+  # Residual variances (equal)
+  satisfaction_a ~~ var*satisfaction_a
+  satisfaction_p ~~ var*satisfaction_p
+
+  # Predictor variances and covariances
+  wnc_a ~~ wnc_p
+  recovery_a ~~ recovery_p
+
+  # Residual covariance
+  satisfaction_a ~~ res_cov*satisfaction_p
+
+  # --------------------------------------------------------
+  # SIMPLE SLOPES (Calculated Parameters)
+  # --------------------------------------------------------
+  actor_slope_no_child   := a + a_int * 0
+  actor_slope_has_child  := a + a_int * 1
+  partner_slope_no_child  := p + p_int * 0
+  partner_slope_has_child := p + p_int * 1
+'
+
+fit_sem_mod <- sem(model_sem_mod, data = ddw)
+summary(fit_sem_mod, standardized = TRUE, fit.measures = TRUE)
+```
+
+## Compare MLM and SEM
+
+The MLM and SEM should agree on the interaction coefficients
+(`p_int` in SEM ≈ `partner_wnc:has_children` in MLM). The
+differences will be in the standard errors (Wald in SEM vs.
+profile in MLM).
+
+```{r}
+#| label: compare
+#| message: false
+#| warning: false
+
+# MLM partner-wnc × children
+cat("MLM partner_wnc:has_children:\n")
+cat("  estimate =", round(fixef(model_mod)["partner_wnc:has_children"], 4), "\n")
+
+# SEM p_int
+pe <- parameterEstimates(fit_sem_mod)
+sem_p_int <- pe[pe$label == "p_int", "est"]
+cat("SEM p_int:\n")
+cat("  estimate =", round(sem_p_int, 4), "\n")
+```
+
+## What to take away
+
+::: {.callout-takeaway}
+## Key takeaways
+
+- A moderated APIM tests whether a dyad-level variable shapes
+  actor or partner effects. The most common form: does the
+  partner crossover effect vary by some dyad-level moderator?
+- In `lme4`, the moderation is a direct interaction term in the
+  `lmer` formula. In `lavaan`, it is a manual product indicator
+  in the wide-format data.
+- The two approaches give nearly identical point estimates.
+- Simple slopes and visualisations are the recommended way to
+  report the conditional effects.
+:::
+
+## What to read next
+
+- The [exercises section](../../exercises/index.qmd) has a
+  nine-section problem set on a separate dataset with three
+  outcomes and three moderators.
+- The [k-patterns page](../../foundations/kpatterns.qmd) explains
+  why the simple-slope approach is more powerful than testing the
+  partner effect in isolation.
