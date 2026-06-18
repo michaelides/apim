@@ -21,7 +21,7 @@ library(lme4)
 library(lmerTest)
 library(dplyr)
 
-load("../data/dyad_data.RData")
+load("data/dyad_data.RData")
 
 cat("Data loaded: ddl (long format)\n")
 cat("Gender distribution:\n")

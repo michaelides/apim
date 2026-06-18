@@ -4,29 +4,30 @@
 #' Author: George Michaelides
 #' =============================================================================
 #'
-#' This script generates synthetic dyadic data for the workshop exercises.
-#' The data simulate dual-earner couples in which the work-related
-#' psychological states of one partner (affect, self-determination, job
-#' crafting) may crossover to influence the other partner's work outcomes
-#' (engagement, performance, creativity).
+#' Generates synthetic dyadic data for the workshop exercises. The data
+#' simulate dual-earner couples in which the work-related psychological
+#' states of one partner (affect, SDT, job crafting) may crossover to
+#' influence the other partner's work outcomes (engagement, performance,
+#' creativity).
 #'
-#' Research Scenario:
-#' We study whether partner affect, SDT (self-determination), and job crafting
-#' crossover to predict each partner's engagement, performance, and creativity.
-#' Three dyad-level moderators may amplify (or dampen) crossover pathways:
-#'   - live_together  (binary; cohabitation)
-#'   - years_together (continuous; relationship tenure)
-#'   - time_spent_this_morning_together (continuous; same-morning contact)
+#' Companion to scripts/01_simulate_data.R, which generates the tutorial
+#' dataset (dyad_data.RData). The exercise dataset (exercise_data.RData)
+#' produced by this script is independent of the tutorial dataset.
 #'
 #' Data Structure:
 #' - N = 250 dyads (500 individuals)
 #' - Person-level predictors: affect, sdt, job_crafting
+#' - Person-level outcomes: engagement, performance, creativity
 #' - Dyad-level moderators: live_together, years_together,
 #'   time_spent_this_morning_together
-#' - Person-level outcomes: engagement, performance, creativity
 #' - Distinguishing variable: gender (male vs. female)
-#' - Wide format uses _a/_p naming (actor, partner) following the
-#'   convention in 01_simulate_data.R
+#' - Wide format uses _a/_p naming (actor, partner)
+#'
+#' Per-section focal outcomes (see exercises/exercises.md for details):
+#'   engagement  is the focal outcome for sections 2, 4, 6, and 8
+#'   creativity  is the focal outcome for sections 3 and 7
+#'   performance is the focal outcome for section 5
+#'   section 9 lets the student pick
 #'
 #' True Data-Generating Parameters:
 #'
@@ -79,7 +80,6 @@
 #'
 #' Prerequisites: None
 #' Output: ../data/exercise_data.RData
-#' Companion file: scripts/01_simulate_data.R (original Hahn et al. 2014 dataset)
 #' Load in later exercises with: load('../data/exercise_data.RData')
 
 # =============================================================================

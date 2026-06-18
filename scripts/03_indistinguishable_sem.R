@@ -21,7 +21,7 @@
 library(lavaan)
 library(dplyr)
 
-load("../data/dyad_data.RData")
+load("data/dyad_data.RData")
 
 cat("Wide format dimensions:", nrow(ddw), "rows,", ncol(ddw), "columns\n\n")
 str(ddl)
